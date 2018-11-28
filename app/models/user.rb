@@ -1,3 +1,6 @@
 class User < ApplicationRecord
-  belongs_to :country
+  include Clearance::User
+
+  belongs_to :country, optional: true
+  validates :first_name, presence: true
 end
