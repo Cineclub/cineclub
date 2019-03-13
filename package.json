@@ -1,5 +1,7 @@
 {
   "name": "cineclub",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "bootstrap": "^4.3.1"
+  }
 }
