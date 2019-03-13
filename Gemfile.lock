@@ -135,6 +135,10 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
+    redis (4.1.0)
+    rein (4.0.0)
+      activerecord (>= 4.0.0, < 6)
+      activesupport (>= 4.0.0, < 6)
     ruby_dep (1.5.0)
     sass (3.7.2)
       sass-listen (~> 4.0.0)
@@ -184,7 +188,6 @@ PLATFORMS
 DEPENDENCIES
   awesome_print
   bootsnap (>= 1.1.0)
-  byebug
   clearance
   dotenv-rails
   jbuilder (~> 2.5)
@@ -194,6 +197,8 @@ DEPENDENCIES
   pry-rails
   puma (~> 3.11)
   rails (~> 5.2.1, >= 5.2.1.1)
+  redis (~> 4.0)
+  rein
   sass-rails (~> 5.0)
   spring
   spring-watcher-listen (~> 2.0.0)
