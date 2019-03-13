@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_28_222057) do
+ActiveRecord::Schema.define(version: 2019_03_13_224500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,16 @@ ActiveRecord::Schema.define(version: 2018_11_28_222057) do
     t.string "code", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["code"], name: "countries_code_unique", unique: true
+    t.index ["name"], name: "countries_name_unique", unique: true
+  end
+
+  create_table "directors", force: :cascade do |t|
+    t.bigint "country_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["country_id"], name: "index_directors_on_country_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -35,8 +45,10 @@ ActiveRecord::Schema.define(version: 2018_11_28_222057) do
     t.string "remember_token", limit: 128
     t.index ["country_id"], name: "index_users_on_country_id"
     t.index ["email"], name: "index_users_on_email"
+    t.index ["email"], name: "users_email_unique", unique: true
     t.index ["remember_token"], name: "index_users_on_remember_token"
   end
 
+  add_foreign_key "directors", "countries"
   add_foreign_key "users", "countries"
 end

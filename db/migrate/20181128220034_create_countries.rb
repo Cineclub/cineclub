@@ -6,5 +6,8 @@ class CreateCountries < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
+
+    add_unique_constraint :countries, :name
+    add_unique_constraint :countries, :code
   end
 end
