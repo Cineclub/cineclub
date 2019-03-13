@@ -5,3 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+countries = YAML.load_file('lib/data/countries.yml')
+
+countries['countries'].each do |code, name|
+  Country.find_or_create_by!(code: code, name: name)
+end
