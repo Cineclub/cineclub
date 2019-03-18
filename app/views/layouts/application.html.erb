@@ -10,17 +10,8 @@
   </head>
 
   <body>
-    <header>
-      <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand" href="/">Cineclub</a>
-        <% if signed_in? %>
-          Signed in as: <%= current_user.email %>
-          <%= button_to 'Sign out', sign_out_path, method: :delete %>
-        <% else %>
-          <%= link_to 'Sign in', sign_in_path %>
-        <% end %>
-      </nav>
-    </header>
+    <%= render "layouts/partials/header" %>
+
     <div class="container">
       <div class="row">
         <div class="col">
