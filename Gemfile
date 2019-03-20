@@ -20,6 +20,8 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'pry-rails'
   gem 'pry-byebug'
+  gem 'rspec-rails', '~> 3.8'
+  gem 'travis'
 end
 
 group :development do
