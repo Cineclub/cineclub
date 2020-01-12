@@ -50,12 +50,14 @@ ActiveRecord::Schema.define(version: 2020_01_08_234124) do
   end
 
   create_table "rounds", force: :cascade do |t|
-    t.bigint "membership_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "team_id", null: false
     t.bigint "movie_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["membership_id"], name: "index_rounds_on_membership_id"
     t.index ["movie_id"], name: "index_rounds_on_movie_id"
+    t.index ["team_id"], name: "index_rounds_on_team_id"
+    t.index ["user_id"], name: "index_rounds_on_user_id"
   end
 
   create_table "screenings", force: :cascade do |t|
@@ -93,8 +95,9 @@ ActiveRecord::Schema.define(version: 2020_01_08_234124) do
   add_foreign_key "directors", "countries"
   add_foreign_key "memberships", "teams"
   add_foreign_key "memberships", "users"
-  add_foreign_key "rounds", "memberships"
   add_foreign_key "rounds", "movies"
+  add_foreign_key "rounds", "teams"
+  add_foreign_key "rounds", "users"
   add_foreign_key "screenings", "rounds"
   add_foreign_key "screenings", "users"
   add_foreign_key "users", "countries"
