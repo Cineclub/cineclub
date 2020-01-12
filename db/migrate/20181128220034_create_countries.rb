@@ -7,7 +7,7 @@ class CreateCountries < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
-    add_unique_constraint :countries, :name
-    add_unique_constraint :countries, :code
+    add_index :countries, :code, unique: true
+    add_index :countries, :name, unique: true
   end
 end
