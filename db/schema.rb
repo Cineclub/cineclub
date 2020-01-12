@@ -25,11 +25,12 @@ ActiveRecord::Schema.define(version: 2020_01_08_234124) do
   end
 
   create_table "directors", force: :cascade do |t|
-    t.bigint "country_id"
-    t.string "name"
+    t.bigint "country_id", null: false
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["country_id"], name: "index_directors_on_country_id"
+    t.index ["name"], name: "index_directors_on_name"
   end
 
   create_table "memberships", force: :cascade do |t|
