@@ -20,8 +20,8 @@ ActiveRecord::Schema.define(version: 2019_03_13_224500) do
     t.string "code", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["code"], name: "countries_code_unique", unique: true
-    t.index ["name"], name: "countries_name_unique", unique: true
+    t.index ["code"], name: "index_countries_on_code", unique: true
+    t.index ["name"], name: "index_countries_on_name", unique: true
   end
 
   create_table "directors", force: :cascade do |t|
@@ -44,8 +44,7 @@ ActiveRecord::Schema.define(version: 2019_03_13_224500) do
     t.string "confirmation_token", limit: 128
     t.string "remember_token", limit: 128
     t.index ["country_id"], name: "index_users_on_country_id"
-    t.index ["email"], name: "index_users_on_email"
-    t.index ["email"], name: "users_email_unique", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["remember_token"], name: "index_users_on_remember_token"
   end
 
