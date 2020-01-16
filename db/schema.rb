@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_13_224500) do
+ActiveRecord::Schema.define(version: 2020_01_08_234124) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,11 +25,56 @@ ActiveRecord::Schema.define(version: 2019_03_13_224500) do
   end
 
   create_table "directors", force: :cascade do |t|
-    t.bigint "country_id"
-    t.string "name"
+    t.bigint "country_id", null: false
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["country_id"], name: "index_directors_on_country_id"
+    t.index ["name"], name: "index_directors_on_name"
+  end
+
+  create_table "memberships", force: :cascade do |t|
+    t.bigint "team_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id", "user_id"], name: "index_memberships_on_team_id_and_user_id", unique: true
+    t.index ["team_id"], name: "index_memberships_on_team_id"
+    t.index ["user_id"], name: "index_memberships_on_user_id"
+  end
+
+  create_table "movies", force: :cascade do |t|
+    t.string "original_title", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["original_title"], name: "index_movies_on_original_title"
+  end
+
+  create_table "rounds", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "team_id", null: false
+    t.bigint "movie_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["movie_id"], name: "index_rounds_on_movie_id"
+    t.index ["team_id"], name: "index_rounds_on_team_id"
+    t.index ["user_id"], name: "index_rounds_on_user_id"
+  end
+
+  create_table "screenings", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "round_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["round_id"], name: "index_screenings_on_round_id"
+    t.index ["user_id"], name: "index_screenings_on_user_id"
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string "name", limit: 20, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_teams_on_name", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -49,5 +94,12 @@ ActiveRecord::Schema.define(version: 2019_03_13_224500) do
   end
 
   add_foreign_key "directors", "countries"
+  add_foreign_key "memberships", "teams"
+  add_foreign_key "memberships", "users"
+  add_foreign_key "rounds", "movies"
+  add_foreign_key "rounds", "teams"
+  add_foreign_key "rounds", "users"
+  add_foreign_key "screenings", "rounds"
+  add_foreign_key "screenings", "users"
   add_foreign_key "users", "countries"
 end
