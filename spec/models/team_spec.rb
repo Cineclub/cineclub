@@ -12,7 +12,7 @@ RSpec.describe Team, type: :model do
     it do
       should validate_length_of(:name).
         is_at_least(5).
-        is_at_most(20)
+        is_at_most(40)
     end
   end
 end
