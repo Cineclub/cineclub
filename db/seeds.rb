@@ -6,8 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-countries = YAML.load_file('lib/data/countries.yml')
+require 'csv'
 
-countries['countries'].each do |code, name|
-  Country.find_or_create_by!(code: code, name: name)
+countries = CSV.read('lib/data/country.csv', headers: true)
+
+countries.each do |country|
+  Country.find_or_create_by!(code: country['id'], name: country['value'])
 end

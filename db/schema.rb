@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_08_234124) do
+ActiveRecord::Schema.define(version: 2020_04_01_180539) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,16 @@ ActiveRecord::Schema.define(version: 2020_01_08_234124) do
     t.datetime "updated_at", null: false
     t.index ["code"], name: "index_countries_on_code", unique: true
     t.index ["name"], name: "index_countries_on_name", unique: true
+  end
+
+  create_table "directions", force: :cascade do |t|
+    t.bigint "director_id", null: false
+    t.bigint "movie_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["director_id", "movie_id"], name: "index_directions_on_director_id_and_movie_id", unique: true
+    t.index ["director_id"], name: "index_directions_on_director_id"
+    t.index ["movie_id"], name: "index_directions_on_movie_id"
   end
 
   create_table "directors", force: :cascade do |t|
@@ -71,7 +81,7 @@ ActiveRecord::Schema.define(version: 2020_01_08_234124) do
   end
 
   create_table "teams", force: :cascade do |t|
-    t.string "name", limit: 20, null: false
+    t.string "name", limit: 40, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_teams_on_name", unique: true
@@ -93,6 +103,8 @@ ActiveRecord::Schema.define(version: 2020_01_08_234124) do
     t.index ["remember_token"], name: "index_users_on_remember_token"
   end
 
+  add_foreign_key "directions", "directors"
+  add_foreign_key "directions", "movies"
   add_foreign_key "directors", "countries"
   add_foreign_key "memberships", "teams"
   add_foreign_key "memberships", "users"
