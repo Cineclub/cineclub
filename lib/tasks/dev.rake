@@ -21,9 +21,10 @@ if Rails.env.development? || Rails.env.staging?
       end
 
       CSV.foreach('lib/data/prime/movies.csv', headers: true) do |movie|
+        director = Director.find_by!(name: movie['director_name'])
         Movie.find_or_create_by!(
           original_title: movie['original_title'],
-          directors: [Director.find_by(name: movie['director_name'])]
+          directors: [director]
         )
       end
     end
