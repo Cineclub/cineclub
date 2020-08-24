@@ -8,6 +8,6 @@
 
 require 'csv'
 
-CSV.foreach('lib/data/country.csv', headers: true) do |country|
+CSV.foreach('lib/data/countries.csv', headers: true) do |country|
   Country.find_or_create_by!(code: country['id'], name: country['value'])
 end
