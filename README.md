@@ -1,6 +1,8 @@
 # Cineclub
 
-[![Build Status](https://travis-ci.org/Cineclub/cineclub.svg?branch=master)](https://travis-ci.org/Cineclub/cineclub) [![Maintainability](https://api.codeclimate.com/v1/badges/b281a49ffda5c67eb333/maintainability)](https://codeclimate.com/github/Cineclub/cineclub/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/b281a49ffda5c67eb333/test_coverage)](https://codeclimate.com/github/Cineclub/cineclub/test_coverage)
+![RSpec](https://github.com/Cineclub/cineclub/workflows/RSpec/badge.svg?branch=master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/b281a49ffda5c67eb333/maintainability)](https://codeclimate.com/github/Cineclub/cineclub/maintainability) 
+[![Test Coverage](https://api.codeclimate.com/v1/badges/b281a49ffda5c67eb333/test_coverage)](https://codeclimate.com/github/Cineclub/cineclub/test_coverage)
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
