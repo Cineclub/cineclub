@@ -1,6 +1,0 @@
-language: ruby
-services:
-  - postgresql
-script:
-  - bundle exec rails db:test:prepare
-  - bundle exec rspec spec
