@@ -5,12 +5,36 @@ if Rails.env.development? || Rails.env.staging?
     desc 'Seed data for development environment'
     task prime: 'db:setup' do
       if Rails.env.development?
-        User.create(
-          first_name: 'John',
-          last_name: 'Wayne',
-          email: 'john@example.org',
-          password: 'stagecoach'
-        )
+        Team.create(name: 'The Rest', users: [
+          User.create(
+            first_name: 'Henry',
+            last_name: 'Fonda',
+            email: 'henry@example.org',
+            password: 'filmpassword'
+          ),
+          User.create(
+            first_name: 'Lauren',
+            last_name: 'Bacall',
+            email: 'lauren@example.org',
+            password: 'filmpassword'
+          )
+        ])
+
+        Team.create(name: 'The Irishmen', users: [
+          User.create(
+            first_name: 'John',
+            last_name: 'Wayne',
+            email: 'john@example.org',
+            password: 'filmpassword'
+          ),
+
+          User.create(
+            first_name: 'Maureen',
+            last_name: "O'Hara",
+            email: 'maureen@example.org',
+            password: 'filmpassword'
+          )
+        ])
       end
 
       CSV.foreach('lib/data/prime/directors.csv', headers: true) do |director|
