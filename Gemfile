@@ -20,7 +20,6 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'rspec-rails', '~> 3.9'
-  gem 'travis'
 end
 
 group :development do
@@ -35,6 +34,3 @@ end
 group :test do
   gem 'shoulda-matchers'
 end
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
