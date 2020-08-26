@@ -58,4 +58,3 @@ jobs:
           POSTGRES_PASSWORD: postgres
         run: |
           bundle exec rspec --require rails_helper
-
