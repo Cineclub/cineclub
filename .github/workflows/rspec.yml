@@ -1,6 +1,6 @@
 name: RSpec
 
-on: [pull_request]
+on: [push, pull_request]
 
 jobs:
   tests:
@@ -25,13 +25,13 @@ jobs:
       - name: Install dependent libraries
         run: sudo apt-get install libpq-dev
 
-      - name: Ruby gem cache
+      - name: Cache gems
         uses: actions/cache@v1
         with:
           path: vendor/bundle
           key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
           restore-keys: |
-            ${{ runner.os }}-gems-
+            ${{ runner.os }}-gem-
 
       - name: Install gems
         run: |
@@ -45,7 +45,7 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
         run: |
-          bin/rails db:setup
+          bin/rails db:create db:setup
 
       - name: Run RSpec tests
         run: bundle exec rspec --require rails_helper
