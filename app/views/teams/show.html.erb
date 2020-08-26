@@ -1,7 +1,7 @@
 <p>Hi, this is team <%= @team.name %>!</p>
 <p>This team was created at <%= @team.created_at %>.</p>
 <% if current_user.member_of?(@team) %>
-  <%= link_to 'Leave', membership_path(team_id: @team.id), method: :delete %>
+  <%= link_to 'Leave', leave_team_path(@team), method: :patch %>
 <% else %>
-  <%= link_to 'Join', memberships_path(team_id: @team.id), method: :post %>
+  <%= link_to 'Join', join_team_path(@team), method: :patch %>
 <% end %>
