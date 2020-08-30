@@ -6,5 +6,8 @@ Rails.application.routes.draw do
     end
   end
   resources :users, controller: :users, only: :create
+  resources :teams do
+    resources :rounds, only: [:create, :show]
+  end
   root to: 'home#show'
 end
