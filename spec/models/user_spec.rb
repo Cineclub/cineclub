@@ -23,8 +23,8 @@ RSpec.describe User, type: :model do
     let(:team) { Team.new(name: 'Example Team') }
 
     context 'when user belongs to team' do
+      before { subject.teams << team }
       it 'returns true' do
-        subject.teams << team
         expect(subject.member_of?(team)).to be_truthy
       end
     end
