@@ -1,4 +1,5 @@
 class TeamsController < ApplicationController
+  before_action :require_login, only: [:join, :leave]
   before_action :set_team, only: [:show, :edit, :update, :destroy, :join, :leave]
 
   def index
