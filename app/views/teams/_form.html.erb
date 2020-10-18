@@ -1,0 +1,11 @@
+<%= form_with model: team, local: true do |form| %>
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, minlength: 5, maxlength: 40, class: 'form-control' %>
+  </div>
+
+  <div class="submit-field">
+    <%= form.submit "Save Team", class: "btn btn-primary" %>
+    <%= link_to "Cancel", team.persisted? && team || teams_path, class: "btn btn-secondary" %>
+  </div>
+<% end %>

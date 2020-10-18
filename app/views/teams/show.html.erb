@@ -1,0 +1,9 @@
+<p>Hi, this is team <%= @team.name %>!</p>
+<p>This team was created at <%= @team.created_at %>.</p>
+<% if signed_in? %>
+  <% if current_user.member_of?(@team) %>
+    <%= link_to 'Leave', leave_team_path(@team), method: :patch %>
+  <% else %>
+    <%= link_to 'Join', join_team_path(@team), method: :patch %>
+  <% end %>
+<% end %>
