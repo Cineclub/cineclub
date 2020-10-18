@@ -1,7 +1,9 @@
-require "rails_helper"
+# frozen_string_literal: true
 
-describe "Rounds management", :type => :request do
-  describe "POST teams/:id/rounds" do
+require 'rails_helper'
+
+describe 'Rounds management', type: :request do
+  describe 'POST teams/:id/rounds' do
     let(:team) { create(:team) }
     let(:user) { create(:user) }
 
@@ -18,7 +20,7 @@ describe "Rounds management", :type => :request do
 
       expect(response).to have_http_status(:found)
       expect(response).to redirect_to team_round_path(team_id: round.team.id, id: round.id)
-      expect(flash[:notice]).to eq "Round created successfully."
+      expect(flash[:notice]).to eq 'Round created successfully.'
     end
   end
 end
