@@ -15,7 +15,7 @@ describe 'Rounds API', type: :request do
 
         expect(round).to be_present
         expect(response).to have_http_status(:found)
-        expect(response).to redirect_to team_round_path(team_id: round.team.id, id: round.id)
+        expect(response).to redirect_to round_path(round)
         expect(flash[:notice]).to eq 'Round created successfully.'
       end
     end
