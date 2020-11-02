@@ -1,0 +1,17 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Created At</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% rounds.each do |round| %>
+      <tr>
+        <td><%= link_to round.id, round_path(round) %></td>
+        <td><%= round.created_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
