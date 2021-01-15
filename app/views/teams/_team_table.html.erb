@@ -2,6 +2,8 @@
   <thead>
     <tr>
       <th scope="col">Name</th>
+      <th scope="col">Members</th>
+      <th scope="col">Rounds</th>
       <th scope="col">Created At</th>
     </tr>
   </thead>
@@ -10,6 +12,8 @@
     <% teams.each do |team| %>
       <tr>
         <td><%= link_to team.name, team_path(team) %></td>
+        <td><%= team.users.count %></td>
+        <td><%= team.rounds.count %></td>
         <td><%= team.created_at %></td>
       </tr>
     <% end %>
