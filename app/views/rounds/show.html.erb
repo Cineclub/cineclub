@@ -1,2 +1,34 @@
-<p>Hi, this is round with ID <%= @round.id %>!</p>
-<p>This round was created at <%= @round.created_at %>.</p>
+<div class="row">
+  <div class="col">
+    <h1>Round <%= @round.id %></h1>
+
+    <% if @round.movie.present? %>
+      <p class="lead"><%= @round.movie.original_title %> by <%= @round.movie.directors.map(&:name).join(", ") %></p>
+    <% else %>
+      <p>No movie has been set yet.</p>
+    <% end %>
+  </div>
+</div>
+
+<% if @round.movie.present? %>
+  <div class="row">
+    <div class="col-6">
+      <h2>Screenings</h2>
+      <table class="table">
+        <tbody>
+          <% @round.team.users.each do |user| %>
+            <tr class="table-<%= user.round_screening(@round).present? ? "success" : "danger" %>">
+              <td><%= user.full_name %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <% if current_user.round_screening(@round).present? %>
+        <%= link_to 'Set movie as unseen', screening_path(current_user.round_screening(@round)), method: :delete, class: "btn btn-secondary" %>
+      <% else %>
+        <%= link_to 'Set movie as seen', round_screenings_path(@round), method: :post, class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
