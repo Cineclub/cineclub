@@ -1,12 +1,53 @@
-<p>Hi, this is team <%= @team.name %>!</p>
+<h1><%= @team.name %></h1>
 <p>This team was created at <%= @team.created_at %>.</p>
+
 <% if signed_in? %>
   <p>
     <% if current_user.member_of?(@team) %>
-      <%= link_to 'Leave', leave_team_path(@team), method: :patch %>
+      <%= link_to 'Leave', leave_team_path(@team), method: :patch, class: "btn btn-secondary" %>
     <% else %>
-      <%= link_to 'Join', join_team_path(@team), method: :patch %>
+      <%= link_to 'Join', join_team_path(@team), method: :patch, class: "btn btn-primary" %>
     <% end %>
   </p>
-  <p><%= link_to 'Create New Round', team_rounds_path(@team), method: :post %></p>
+<% end %>
+
+<h2 class="title">Members</h2>
+<% if @team.users.present? %>
+  <ul>
+    <% @team.users.each do |user| %>
+      <li><%= user.full_name %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No members have joined this team yet.</p>
+<% end %>
+
+<h2>Rounds</h2>
+<% if @team.rounds.present? %>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Movie</th>
+        <th>User</th>
+        <th>Created at</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @team.rounds.each do |round| %>
+        <tr>
+          <td><%= round.movie&.original_title %></td>
+          <td><%= round.user.full_name %></td>
+          <td><%= round.created_at %></td>
+          <td><%= link_to 'View', round_path(round) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No rounds have been created yet.</p>
+<% end %>
+
+<% if signed_in? && current_user.member_of?(@team) %>
+<p><%= link_to 'Create New Round', team_rounds_path(@team), method: :post, class: "btn btn-primary" %></p>
 <% end %>

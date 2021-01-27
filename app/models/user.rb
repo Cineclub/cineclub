@@ -5,9 +5,15 @@ class User < ApplicationRecord
   has_many :memberships
   has_many :rounds
   has_many :teams, through: :memberships
+  has_many :screenings
+
   validates :first_name, presence: true
 
   def member_of?(team)
     memberships.exists?(team: team)
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
   end
 end
