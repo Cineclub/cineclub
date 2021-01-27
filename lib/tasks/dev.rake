@@ -21,19 +21,19 @@ if Rails.env.development? || Rails.env.staging?
 
       if Rails.env.development?
         Team.create(name: 'The Rest', users: [
-          User.create(
-            first_name: 'Henry',
-            last_name: 'Fonda',
-            email: 'henry@example.org',
-            password: 'filmpassword'
-          ),
-          User.create(
-            first_name: 'Lauren',
-            last_name: 'Bacall',
-            email: 'lauren@example.org',
-            password: 'filmpassword'
-          )
-        ])
+                      User.create(
+                        first_name: 'Henry',
+                        last_name: 'Fonda',
+                        email: 'henry@example.org',
+                        password: 'filmpassword'
+                      ),
+                      User.create(
+                        first_name: 'Lauren',
+                        last_name: 'Bacall',
+                        email: 'lauren@example.org',
+                        password: 'filmpassword'
+                      )
+                    ])
 
         Team.create(
           name: 'The Irishmen',

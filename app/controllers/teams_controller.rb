@@ -1,13 +1,12 @@
 class TeamsController < ApplicationController
-  before_action :require_login, only: [:join, :leave]
-  before_action :set_team, only: [:show, :edit, :update, :destroy, :join, :leave]
+  before_action :require_login, only: %i[join leave]
+  before_action :set_team, only: %i[show edit update destroy join leave]
 
   def index
     @teams = Team.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @team = Team.new
@@ -23,8 +22,7 @@ class TeamsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @team.update(team_params)

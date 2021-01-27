@@ -1,7 +1,7 @@
 class RoundsController < ApplicationController
   before_action :require_login
   before_action :set_round, only: [:show]
-  before_action :set_team, only: [:index, :create]
+  before_action :set_team, only: %i[index create]
 
   def index
     @rounds =
