@@ -55,9 +55,9 @@ if Rails.env.development? || Rails.env.staging?
             Round.create(user: User.last, movie: Movie.last)
           ]
         )
-      end
 
-      Screening.create(user: User.last, round: Round.last)
+        Screening.create(user: User.last, round: Round.last)
+      end
     end
   end
 end
