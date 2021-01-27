@@ -17,7 +17,7 @@ class ScreeningsController < ApplicationController
     screening_round = @screening.round
     @screening.destroy
 
-    redirect_to round_path(screening_round)
+    redirect_to round_path(screening_round), notice: 'Screening was removed successfully.'
   end
 
   private

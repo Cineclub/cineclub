@@ -23,6 +23,8 @@ class RoundsController < ApplicationController
   end
 
   def show
+    @screenings = @round.screenings.includes(:user)
+    @current_screening = @round.screenings.find_by(user: current_user)
   end
 
   private

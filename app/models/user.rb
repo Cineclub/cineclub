@@ -16,8 +16,4 @@ class User < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
-
-  def round_screening(round)
-    screenings.find_by(round: round)
-  end
 end
