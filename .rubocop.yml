@@ -1,0 +1,42 @@
+require:
+ - rubocop-rails
+
+AllCops:
+  TargetRubyVersion: 2.5.3
+  Exclude:
+    - "tmp/**/*"
+    - "node_modules/**/*"
+    - "db/schema.rb"
+    - "db/seeds.rb"
+    - "db/migrate/*"
+    - "bin/rails"
+    - "bin/rake"
+    - "bin/spring"
+
+Rails:
+  Enabled: true
+
+Style/FrozenStringLiteralComment:
+  Enabled: true
+  EnforcedStyle: always
+
+Style/FormatStringToken:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 120
+
+Style/StringLiterals:
+  EnforcedStyle: single_quotes
+
+Metrics/ClassLength:
+  Max: 100
+  Exclude:
+    - "spec/**/*"
+
+Metrics/BlockLength:
+  CountComments: true
+  Max: 25
+  ExcludedMethods: []
+  Exclude:
+    - "spec/**/*"
