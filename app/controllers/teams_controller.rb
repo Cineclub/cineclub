@@ -1,6 +1,6 @@
 class TeamsController < ApplicationController
   before_action :require_login, only: %i[join leave]
-  before_action :set_team, only: %i[show edit update destroy join leave]
+  before_action :set_team, only: %i[show edit update join leave]
 
   def index
     @teams = Team.all
