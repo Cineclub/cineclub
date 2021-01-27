@@ -17,7 +17,7 @@ Rails:
   Enabled: true
 
 Style/FrozenStringLiteralComment:
-  Enabled: true
+  Enabled: false
   EnforcedStyle: always
 
 Style/FormatStringToken:
@@ -40,3 +40,6 @@ Metrics/BlockLength:
   ExcludedMethods: []
   Exclude:
     - "spec/**/*"
+
+Style/Documentation:
+  Enabled: false
