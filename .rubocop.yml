@@ -3,6 +3,7 @@ require:
 
 AllCops:
   TargetRubyVersion: 2.5.3
+  NewCops: disable
   Exclude:
     - "tmp/**/*"
     - "node_modules/**/*"
@@ -41,9 +42,7 @@ Metrics/ClassLength:
     - "spec/**/*"
 
 Metrics/BlockLength:
-  CountComments: true
   Max: 25
-  ExcludedMethods: []
   Exclude:
     - "spec/**/*"
     - "lib/tasks/*"
@@ -51,5 +50,8 @@ Metrics/BlockLength:
 Style/Documentation:
   Enabled: false
 
-Style/FirstArrayElementIndentation:
+Layout/FirstArrayElementIndentation:
+  Enabled: false
+
+Rails/UnknownEnv:
   Enabled: false
