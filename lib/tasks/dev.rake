@@ -52,6 +52,7 @@ if Rails.env.development? || Rails.env.staging?
             )
           ],
           rounds: [
+            Round.create(user: User.first, movie: Movie.first),
             Round.create(user: User.last, movie: Movie.last)
           ]
         )

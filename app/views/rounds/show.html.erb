@@ -3,7 +3,7 @@
     <h1>Round <%= @round.id %></h1>
 
     <% if @round.movie.present? %>
-      <p class="lead"><%= @round.movie.original_title %> by <%= @round.movie.directors.map(&:name).join(", ") %></p>
+      <p class="lead"><%= @round.movie.original_title %> by <%= @round.movie.directors_names %></p>
     <% else %>
       <p>No movie has been set yet.</p>
     <% end %>
