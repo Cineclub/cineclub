@@ -2,10 +2,10 @@ class User < ApplicationRecord
   include Clearance::User
 
   belongs_to :country, optional: true
-  has_many :memberships
+  has_many :memberships, dependent: :destroy
   has_many :rounds
   has_many :teams, through: :memberships
-  has_many :screenings
+  has_many :screenings, dependent: :destroy
 
   validates :first_name, presence: true
 
