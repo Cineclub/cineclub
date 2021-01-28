@@ -46,6 +46,10 @@ Metrics/BlockLength:
   ExcludedMethods: []
   Exclude:
     - "spec/**/*"
+    - "lib/tasks/*"
 
 Style/Documentation:
+  Enabled: false
+
+Style/FirstArrayElementIndentation:
   Enabled: false
