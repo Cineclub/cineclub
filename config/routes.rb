@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :teams do
     resources :rounds, only: [:create]
   end
-  resources :rounds do
+  resources :rounds, only: [:create, :show] do
     resources :screenings, only: [:create]
   end
   resources :screenings, only: [:destroy]
