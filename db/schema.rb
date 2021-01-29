@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 2020_04_01_180539) do
     t.bigint "round_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["round_id", "user_id"], name: "index_screenings_on_round_id_and_user_id", unique: true
     t.index ["round_id"], name: "index_screenings_on_round_id"
     t.index ["user_id"], name: "index_screenings_on_user_id"
   end
