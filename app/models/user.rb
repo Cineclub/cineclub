@@ -3,7 +3,7 @@ class User < ApplicationRecord
 
   belongs_to :country, optional: true
   has_many :memberships, dependent: :destroy
-  has_many :rounds
+  has_many :rounds, dependent: :destroy # this should be nullified
   has_many :teams, through: :memberships
   has_many :screenings, dependent: :destroy
 
