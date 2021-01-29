@@ -3,5 +3,8 @@
   <p class="lead">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet eveniet enim aut expedita fugiat praesentium
   deleniti delectus possimus?</p>
   <p class="lead">Ducimus eveniet dolores, unde dignissimos!</p>
-  <%= link_to 'Join us', sign_up_path, { class: 'btn btn-primary' } %>
+
+  <% unless signed_in? %>
+    <%= link_to 'Join us', sign_up_path, { class: 'btn btn-primary' } %>
+  <% end %>
 </div>
