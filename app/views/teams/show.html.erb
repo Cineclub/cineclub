@@ -36,7 +36,7 @@
           <div class="card h-100">
             <div class="card-body">
               <h5 class="card-title"><%= round.movie&.original_title %></h5>
-              <h6 class="card-subtitle mb-2 text-muted"><%= round.movie&.directors_names %></h6>
+              <h6 class="card-subtitle mb-2 text-muted"><%= round.movie&.directors.map(&:name).join(', ') %></h6>
               <p class="card-text"><%= round.user.full_name %></p>
             </div>
             <div class="card-footer">

@@ -4,8 +4,4 @@ class Movie < ApplicationRecord
 
   validates :original_title, presence: true
   validates :directors, presence: true
-
-  def directors_names
-    directors.map(&:name).join(', ')
-  end
 end
