@@ -9,7 +9,7 @@ RSpec.describe User, type: :model do
   end
 
   describe 'validations' do
-    it { should validate_presence_of(:first_name)}
+    it { should validate_presence_of(:first_name) }
   end
 
   describe '#member_of?' do
