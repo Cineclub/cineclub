@@ -11,5 +11,6 @@ feature 'User signs out' do
 
     click_link 'Sign out'
     expect(page).to have_content 'Sign in'
+    expect(page).not_to have_content 'Sign out'
   end
 end
