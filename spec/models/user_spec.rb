@@ -6,6 +6,7 @@ RSpec.describe User, type: :model do
     it { should have_many(:memberships) }
     it { should have_many(:rounds) }
     it { should have_many(:teams) }
+    it { should have_many(:screenings) }
   end
 
   describe 'validations' do
