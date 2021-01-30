@@ -34,6 +34,6 @@ group :development do
 end
 
 group :test do
-  gem 'shoulda-matchers'
   gem 'capybara'
+  gem 'shoulda-matchers'
 end
