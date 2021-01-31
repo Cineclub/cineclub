@@ -18,7 +18,7 @@ class Movie < ApplicationRecord
     directors = directors_data.map do |d|
       Director.find_or_create_by!(
         name: d['name'],
-        country: Country.first # TODO: fecth country
+        country: Country.first # TODO: fetch country
       )
     end
 
