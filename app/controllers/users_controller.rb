@@ -5,6 +5,7 @@ class UsersController < Clearance::UsersController
     params.require(:user).permit(
       :email,
       :first_name,
+      :last_name,
       :password
     )
   end

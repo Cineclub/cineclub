@@ -5,4 +5,9 @@ RSpec.describe Screening, type: :model do
     it { should belong_to(:user) }
     it { should belong_to(:round) }
   end
+
+  describe 'validations' do
+    subject { build(:screening) }
+    it { should validate_uniqueness_of(:user).scoped_to(:round_id) }
+  end
 end
