@@ -6,6 +6,8 @@ class ScreeningsController < ApplicationController
   def create
     screening = Screening.new(round: @round, user: current_user)
 
+    authorize screening
+
     if screening.save
       redirect_to round_path(@round), notice: 'Screening was added successfully.'
     else
@@ -15,6 +17,9 @@ class ScreeningsController < ApplicationController
 
   def destroy
     screening_round = @screening.round
+
+    authorize @screening
+
     @screening.destroy
 
     redirect_to round_path(screening_round), notice: 'Screening was removed successfully.'
