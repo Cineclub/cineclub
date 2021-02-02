@@ -6,6 +6,8 @@ class RoundsController < ApplicationController
   def create
     round = Round.new(team: @team, user: current_user)
 
+    authorize round
+
     if round.save
       redirect_to round_path(round), notice: 'Round created successfully.'
     else
@@ -25,6 +27,6 @@ class RoundsController < ApplicationController
   end
 
   def set_team
-    @team = Team.find(params[:team_id]) if params[:team_id].present?
+    @team = Team.find(params[:team_id])
   end
 end
