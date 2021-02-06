@@ -6,5 +6,9 @@ FactoryBot.define do
     first_name { 'John' }
     last_name { 'Doe' }
     password { 'password-1234' }
+
+    trait :confirmed do
+      email_confirmed_at { DateTime.now }
+    end
   end
 end
