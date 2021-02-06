@@ -43,3 +43,6 @@ Icon
 .Trashes
 .VolumeIcon.icns
 .com.apple.timemachine.donotpresent
+
+# Ignore the local-only version of .env which may contain sensitive data
+.env.local
