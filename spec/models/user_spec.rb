@@ -47,7 +47,7 @@ RSpec.describe User, type: :model do
 
   describe '#confirm_email' do
     let(:user) { build(:user, first_name: 'John', last_name: 'Doe') }
-    let(:fake_date)  { DateTime.new(2021, 1, 1, 12) }
+    let(:fake_date) { DateTime.new(2021, 1, 1, 12) }
 
     before { travel_to fake_date }
 

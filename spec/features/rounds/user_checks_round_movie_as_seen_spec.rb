@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'User checks round movie as seen' do
-  given(:user) { create(:user) }
+  given(:user) { create(:user, :confirmed) }
   given(:team) { create(:team, name: 'Some team') }
   given(:round) { create(:round, user: user) }
 

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'User triggers the creation of a new round' do
-  given(:user) { create(:user) }
+  given(:user) { create(:user, :confirmed) }
 
   background do
     user.teams << create(:team, name: 'Some team')

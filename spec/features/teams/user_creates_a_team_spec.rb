@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'User creates a team' do
   background do
-    user = create(:user)
+    user = create(:user, :confirmed)
     sign_in(user)
   end
 
