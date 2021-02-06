@@ -4,7 +4,7 @@ require 'tmdb/movie_credit_entry'
 
 module Tmdb
   class Client
-    BASE_URL = 'https://api.themoviedb.org'
+    BASE_URL = 'https://api.themoviedb.org'.freeze
     API_VERSION = 3
 
     def initialize(options = {})
