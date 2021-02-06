@@ -1,7 +1,8 @@
-require 'tmdb/configuration'
-require 'tmdb/client'
-
 module Tmdb
+  class Configuration
+    attr_accessor :api_token
+  end
+
   def self.configuration
     @configuration ||= Configuration.new
   end
