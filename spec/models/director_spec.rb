@@ -6,6 +6,9 @@ RSpec.describe Director, type: :model do
   end
 
   describe 'validations' do
+    subject { build(:director) }
     it { should validate_presence_of(:name) }
+    it { should validate_uniqueness_of(:tmdb_id).allow_nil }
+    it { should validate_uniqueness_of(:imdb_id).allow_nil }
   end
 end
