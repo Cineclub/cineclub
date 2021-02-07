@@ -15,7 +15,8 @@ class ImportTmdbMovie
 
     fetch_movie
     fetch_crew
-    import_movie
+    upsert_directors
+    upsert_movie
   end
 
   private
@@ -28,36 +29,34 @@ class ImportTmdbMovie
     @tmdb_movie_crew = @client.movie_crew(@id)
   end
 
-  def movie_directors
-    @movie_directors ||= @tmdb_movie_crew.select { |e| e.job == 'Director' }
+  def movie_crew_directors
+    @movie_crew_directors ||= @tmdb_movie_crew.select { |e| e.job == 'Director' }
   end
 
-  def import_movie
-    @directors =
-      movie_directors.map do |tmdb_director|
-        director = Director.find_or_initialize_by(tmdb_id: tmdb_director.id)
+  def upsert_director(tmdb_director)
+    director = Director.find_or_initialize_by(tmdb_id: tmdb_director.id)
 
-        director.name = tmdb_director.name
+    director.assign_attributes(name: tmdb_director.name)
 
-        unless director.save
-          director.errors.full_messages.each { |msg| error(msg) }
-        end
-        director
-      end
+    director.errors.full_messages.each { |msg| error(msg) } unless director.save
+    director
+  end
 
-    @movie =
-      begin
-        movie = Movie.find_or_initialize_by(tmdb_id: @tmdb_movie.id)
+  def upsert_directors
+    @directors = movie_crew_directors.map { |tmdb_director| upsert_director(tmdb_director) }
+  end
 
-        movie.original_title = @tmdb_movie.original_title
-        movie.imdb_id = @tmdb_movie.imdb_id
-        movie.year = Date.parse(@tmdb_movie.release_date).year
-        movie.directors = @directors
+  def upsert_movie
+    movie = Movie.find_or_initialize_by(tmdb_id: @tmdb_movie.id)
 
-        unless movie.save
-          movie.errors.full_messages.each { |msg| error(msg) }
-        end
-        movie
-      end
+    movie.assign_attributes(
+      original_title: @tmdb_movie.original_title,
+      imdb_id: @tmdb_movie.imdb_id,
+      year: Date.parse(@tmdb_movie.release_date).year,
+      directors: @directors
+    )
+
+    movie.errors.full_messages.each { |msg| error(msg) } unless movie.save
+    @movie = movie
   end
 end
