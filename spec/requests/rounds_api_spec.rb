@@ -5,7 +5,7 @@ require 'rails_helper'
 describe 'Rounds API', type: :request do
   describe 'POST /teams/:id/rounds' do
     let(:team) { create(:team) }
-    let(:user) { create(:user) }
+    let(:user) { create(:user, :confirmed) }
 
     context 'when team and user are valid' do
       it "creates a round for the authenticated user and redirects to the round's show page" do

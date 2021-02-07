@@ -36,4 +36,25 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe '#full_name' do
+    let(:user) { build(:user, first_name: 'John', last_name: 'Doe') }
+
+    it 'returns the first name and last name concatenated' do
+      expect(user.full_name).to eq 'John Doe'
+    end
+  end
+
+  describe '#confirm_email' do
+    let(:user) { build(:user, first_name: 'John', last_name: 'Doe') }
+    let(:fake_date) { DateTime.new(2021, 1, 1, 12) }
+
+    before { travel_to fake_date }
+
+    it 'sets email_confirmed_at to the current date and time' do
+      user.confirm_email
+
+      expect(user.email_confirmed_at).to eq fake_date
+    end
+  end
 end
