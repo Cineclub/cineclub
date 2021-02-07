@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe 'Screenings API', type: :request do
-  let(:user) { create(:user) }
+  let(:user) { create(:user, :confirmed) }
   let(:team) { create(:team) }
   let(:round) { create(:round, team: team) }
 
