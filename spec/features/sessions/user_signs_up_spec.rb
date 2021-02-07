@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'User signs up' do
-  scenario 'they are logged in after signing up' do
+  scenario 'they are created after signing up' do
     visit sign_up_path
 
     fill_in 'Email', with: 'user@example.org'
@@ -10,7 +10,7 @@ feature 'User signs up' do
     fill_in 'Password', with: 'password'
     click_button 'Sign up'
 
-    expect(page).to have_content 'Sign out'
+    expect(User.count).to eq 1
   end
 
   scenario 'they are not logged in if sign up fails' do

@@ -5,7 +5,7 @@ require 'rails_helper'
 describe 'Rounds API', type: :request do
   describe 'POST /teams/:id/rounds' do
     let(:team) { create(:team) }
-    let(:user) { create(:user) }
+    let(:user) { create(:user, :confirmed) }
 
     context 'when the user belongs to the team' do
       before do

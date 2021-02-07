@@ -16,4 +16,8 @@ class User < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  def confirm_email
+    update(email_confirmed_at: DateTime.now)
+  end
 end

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'User joins an existing team' do
-  given(:user) { create(:user) }
+  given(:user) { create(:user, :confirmed) }
 
   background do
     sign_in(user)
