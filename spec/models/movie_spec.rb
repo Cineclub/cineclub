@@ -8,5 +8,6 @@ RSpec.describe Movie, type: :model do
   describe 'validations' do
     it { should validate_presence_of(:directors) }
     it { should validate_presence_of(:original_title) }
+    it { should validate_presence_of(:year) }
   end
 end

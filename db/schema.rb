@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 2021_02_06_193253) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "tmdb_id"
-    t.bigint "imdb_id"
+    t.string "imdb_id"
     t.index ["imdb_id"], name: "index_directors_on_imdb_id", unique: true
     t.index ["name"], name: "index_directors_on_name"
     t.index ["tmdb_id"], name: "index_directors_on_tmdb_id", unique: true
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 2021_02_06_193253) do
 
   create_table "movies", force: :cascade do |t|
     t.string "original_title", null: false
+    t.integer "year", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "tmdb_id"
@@ -64,6 +65,7 @@ ActiveRecord::Schema.define(version: 2021_02_06_193253) do
     t.index ["imdb_id"], name: "index_movies_on_imdb_id", unique: true
     t.index ["original_title"], name: "index_movies_on_original_title"
     t.index ["tmdb_id"], name: "index_movies_on_tmdb_id", unique: true
+    t.index ["year"], name: "index_movies_on_year"
   end
 
   create_table "rounds", force: :cascade do |t|
