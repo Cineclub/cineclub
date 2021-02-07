@@ -5,13 +5,19 @@ Rails.application.routes.draw do
       patch 'leave'
     end
   end
+
   resources :users, controller: :users, only: :create
+
+  get "/confirm_email/:token" => "email_confirmations#update", as: "confirm_email"
+
   resources :teams do
     resources :rounds, only: [:create]
   end
+
   resources :rounds, only: [:create, :show] do
     resources :screenings, only: [:create]
   end
+
   resources :screenings, only: [:destroy]
 
   root to: 'home#show'
