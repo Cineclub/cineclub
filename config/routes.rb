@@ -8,13 +8,14 @@ Rails.application.routes.draw do
 
   resources :users, controller: :users, only: :create
 
-  get "/confirm_email/:token" => "email_confirmations#update", as: "confirm_email"
+  get "/confirm_email" => "email_confirmations#edit", as: "confirm_email"
+  put "/confirm_email" => "email_confirmations#update"
 
-  resources :teams do
+  resources :teams, only: [] do
     resources :rounds, only: [:create]
   end
 
-  resources :rounds, only: [:create, :show] do
+  resources :rounds, only: [:show] do
     resources :screenings, only: [:create]
   end
 
