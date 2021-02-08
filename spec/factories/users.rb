@@ -10,5 +10,9 @@ FactoryBot.define do
     trait :confirmed do
       email_confirmed_at { DateTime.now }
     end
+
+    trait :with_email_confirmation_token do
+      email_confirmation_token { Clearance::Token.new }
+    end
   end
 end
