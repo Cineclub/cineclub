@@ -12,7 +12,7 @@ RSpec.describe UserMailer, type: :mailer do
     end
 
     it 'renders the confirmation link' do
-      confirmation_link = '<a href="http://localhost:3000/confirm_email/dummytoken">confirm e-mail address</a>'
+      confirmation_link = '<a href="http://localhost:3000/confirm_email?token=dummytoken">confirm e-mail address</a>'
       expect(mail.body.encoded.include?(confirmation_link)).to eq true
     end
   end
