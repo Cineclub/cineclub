@@ -28,4 +28,4 @@ jobs:
 
       - name: Run Rubocop
         run: |
-          bundle exec rubocop --fail-fast
+          bin/rubocop --fail-fast
