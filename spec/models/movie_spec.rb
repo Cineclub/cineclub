@@ -10,7 +10,7 @@ RSpec.describe Movie, type: :model do
     it { should validate_presence_of(:directors) }
     it { should validate_presence_of(:original_title) }
     it { should validate_presence_of(:year) }
-    it { should validate_uniqueness_of(:tmdb_id).allow_nil }
+    it { should validate_uniqueness_of(:tmdb_id) }
     it { should validate_uniqueness_of(:imdb_id).allow_nil }
   end
 end

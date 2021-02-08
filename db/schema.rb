@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_165526) do
 
   create_table "directors", force: :cascade do |t|
     t.string "name", null: false
-    t.bigint "tmdb_id"
+    t.bigint "tmdb_id", null: false
     t.string "imdb_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_165526) do
   create_table "movies", force: :cascade do |t|
     t.string "original_title", null: false
     t.integer "year", null: false
-    t.bigint "tmdb_id"
+    t.bigint "tmdb_id", null: false
     t.string "imdb_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

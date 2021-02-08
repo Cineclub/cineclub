@@ -2,7 +2,7 @@ class CreateDirectors < ActiveRecord::Migration[5.2]
   def change
     create_table :directors do |t|
       t.string :name, null: false
-      t.bigint :tmdb_id
+      t.bigint :tmdb_id, null: false
       t.string :imdb_id
 
       t.timestamps

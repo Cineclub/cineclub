@@ -5,6 +5,6 @@ class Movie < ApplicationRecord
   validates :original_title, presence: true
   validates :year, presence: true
   validates :directors, presence: true
-  validates :tmdb_id, uniqueness: true, allow_nil: true
+  validates :tmdb_id, presence: true, uniqueness: true
   validates :imdb_id, uniqueness: true, allow_nil: true
 end
