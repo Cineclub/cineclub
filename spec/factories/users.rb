@@ -8,7 +8,7 @@ FactoryBot.define do
     password { 'password-1234' }
 
     trait :confirmed do
-      email_confirmed_at { DateTime.now }
+      email_confirmed_at { Time.current }
     end
   end
 end

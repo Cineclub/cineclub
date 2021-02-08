@@ -7,7 +7,7 @@ if Rails.env.development? || Rails.env.staging?
       CSV.foreach('lib/data/prime/directors.csv', headers: true) do |director|
         Director.find_or_create_by!(
           name: director['name'],
-          country: Country.find_by(code: director['country_code'])
+          tmdb_id: director['tmdb_id']
         )
       end
 
@@ -15,6 +15,8 @@ if Rails.env.development? || Rails.env.staging?
         director = Director.find_by!(name: movie['director_name'])
         Movie.find_or_create_by!(
           original_title: movie['original_title'],
+          year: movie['year'],
+          tmdb_id: movie['tmdb_id'],
           directors: [director]
         )
       end
@@ -42,13 +44,16 @@ if Rails.env.development? || Rails.env.staging?
               first_name: 'John',
               last_name: 'Wayne',
               email: 'john@example.org',
-              password: 'filmpassword'
+              password: 'filmpassword',
+              email_confirmed_at: Time.current
             ),
             User.create(
               first_name: 'Maureen',
               last_name: "O'Hara",
               email: 'maureen@example.org',
-              password: 'filmpassword'
+              password: 'filmpassword',
+              admin: true,
+              email_confirmed_at: Time.current
             )
           ],
           rounds: [

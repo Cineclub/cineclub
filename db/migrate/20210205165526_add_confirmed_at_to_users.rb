@@ -1,6 +1,10 @@
 class AddConfirmedAtToUsers < ActiveRecord::Migration[5.2]
   def change
-    add_column :users, :email_confirmation_token, :string, null: false, default: ""
-    add_column :users, :email_confirmed_at, :datetime
+    change_table :users do |t|
+      t.string :email_confirmation_token, null: false, default: ""
+      t.datetime :email_confirmed_at
+      t.index :email_confirmation_token
+      t.index :email_confirmed_at
+    end
   end
 end
