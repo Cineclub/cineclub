@@ -8,7 +8,7 @@ RSpec.describe UserMailer, type: :mailer do
     it 'renders the headers' do
       expect(mail.subject).to eq 'Welcome to Cineclub'
       expect(mail.to).to eq ['johndoe@example.org']
-      expect(mail.from).to eq ['from@example.com']
+      expect(mail.from).to eq ['no-reply@cineclub.app']
     end
 
     it 'renders the confirmation link' do
