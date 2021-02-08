@@ -57,7 +57,7 @@ jobs:
           POSTGRES_PASSWORD: postgres
         run: |
           cp config/database.yml.github-actions config/database.yml
-          bundle exec rails db:create db:schema:load
+          bin/rails db:create db:schema:load
 
       - name: Run RSpec tests
         env:
@@ -65,4 +65,4 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
         run: |
-          bundle exec rspec --require rails_helper
+          bin/rspec --require rails_helper
