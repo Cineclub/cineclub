@@ -44,13 +44,16 @@ if Rails.env.development? || Rails.env.staging?
               first_name: 'John',
               last_name: 'Wayne',
               email: 'john@example.org',
-              password: 'filmpassword'
+              password: 'filmpassword',
+              email_confirmed_at: Time.current
             ),
             User.create(
               first_name: 'Maureen',
               last_name: "O'Hara",
               email: 'maureen@example.org',
-              password: 'filmpassword'
+              password: 'filmpassword',
+              admin: true,
+              email_confirmed_at: Time.current
             )
           ],
           rounds: [
