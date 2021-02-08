@@ -9,7 +9,7 @@ class EmailConfirmationsController < ApplicationController
       return
     end
 
-    user.confirm_email
+    user.confirm_email!
     redirect_to root_path, notice: "Your e-mail address has been confirmed successfully. You're now able to sign in."
   end
 end
