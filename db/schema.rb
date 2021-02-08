@@ -35,12 +35,14 @@ ActiveRecord::Schema.define(version: 2021_02_05_165526) do
   end
 
   create_table "directors", force: :cascade do |t|
-    t.bigint "country_id", null: false
     t.string "name", null: false
+    t.bigint "tmdb_id", null: false
+    t.string "imdb_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["country_id"], name: "index_directors_on_country_id"
+    t.index ["imdb_id"], name: "index_directors_on_imdb_id", unique: true
     t.index ["name"], name: "index_directors_on_name"
+    t.index ["tmdb_id"], name: "index_directors_on_tmdb_id", unique: true
   end
 
   create_table "memberships", force: :cascade do |t|
@@ -55,9 +57,15 @@ ActiveRecord::Schema.define(version: 2021_02_05_165526) do
 
   create_table "movies", force: :cascade do |t|
     t.string "original_title", null: false
+    t.integer "year", null: false
+    t.bigint "tmdb_id", null: false
+    t.string "imdb_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["imdb_id"], name: "index_movies_on_imdb_id", unique: true
     t.index ["original_title"], name: "index_movies_on_original_title"
+    t.index ["tmdb_id"], name: "index_movies_on_tmdb_id", unique: true
+    t.index ["year"], name: "index_movies_on_year"
   end
 
   create_table "rounds", force: :cascade do |t|
@@ -108,7 +116,6 @@ ActiveRecord::Schema.define(version: 2021_02_05_165526) do
 
   add_foreign_key "directions", "directors"
   add_foreign_key "directions", "movies"
-  add_foreign_key "directors", "countries"
   add_foreign_key "memberships", "teams"
   add_foreign_key "memberships", "users"
   add_foreign_key "rounds", "movies"
