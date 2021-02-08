@@ -113,6 +113,8 @@ ActiveRecord::Schema.define(version: 2021_02_08_205840) do
     t.index ["admin"], name: "index_users_on_admin"
     t.index ["country_id"], name: "index_users_on_country_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["email_confirmation_token"], name: "index_users_on_email_confirmation_token"
+    t.index ["email_confirmed_at"], name: "index_users_on_email_confirmed_at"
     t.index ["remember_token"], name: "index_users_on_remember_token"
   end
 
