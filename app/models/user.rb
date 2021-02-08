@@ -18,6 +18,6 @@ class User < ApplicationRecord
   end
 
   def confirm_email
-    update(email_confirmed_at: DateTime.now)
+    update(email_confirmed_at: Time.current)
   end
 end
