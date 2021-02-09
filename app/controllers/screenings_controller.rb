@@ -4,6 +4,8 @@ class ScreeningsController < ApplicationController
   before_action :set_screening, only: [:destroy]
 
   def create
+    authorize @round, :create_screening?
+
     screening = Screening.new(round: @round, user: current_user)
 
     if screening.save
@@ -14,10 +16,11 @@ class ScreeningsController < ApplicationController
   end
 
   def destroy
-    screening_round = @screening.round
-    @screening.destroy
+    authorize @screening
 
-    redirect_to round_path(screening_round), notice: 'Screening was removed successfully.'
+    @screening.destroy # TODO: we're not doing anything with the result, so don't if was successful
+
+    redirect_to round_path(@screening.round), notice: 'Screening was removed successfully.'
   end
 
   private

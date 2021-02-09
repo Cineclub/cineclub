@@ -4,6 +4,8 @@ class RoundsController < ApplicationController
   before_action :set_team, only: [:create]
 
   def create
+    authorize @team, :create_round?
+
     round = Round.new(team: @team, user: current_user)
 
     if round.save
@@ -25,6 +27,6 @@ class RoundsController < ApplicationController
   end
 
   def set_team
-    @team = Team.find(params[:team_id]) if params[:team_id].present?
+    @team = Team.find(params[:team_id])
   end
 end
