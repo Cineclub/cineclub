@@ -3,13 +3,12 @@ require 'rails_helper'
 describe RoundPolicy do
   subject { described_class }
 
-  permissions :create? do
-    let(:user) { create(:user) }
-    let(:team) { create(:team) }
-    let(:round) { create(:round, team: team) }
+  let(:round) { build(:round) }
+  let(:user) { build(:user) }
 
+  permissions :create_screening? do
     it "grants access if user belongs to the round's team" do
-      team.users << user
+      Membership.create(user: user, team: round.team)
 
       expect(subject).to permit(user, round)
     end
