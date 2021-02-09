@@ -1,9 +1,5 @@
 class ScreeningPolicy < ApplicationPolicy
-  def create?
-    user.member_of?(record.round.team)
-  end
-
   def destroy?
-    create?
+    user == record.user
   end
 end

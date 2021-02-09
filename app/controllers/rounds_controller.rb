@@ -4,9 +4,9 @@ class RoundsController < ApplicationController
   before_action :set_team, only: [:create]
 
   def create
-    round = Round.new(team: @team, user: current_user)
+    authorize @team, :create_round?
 
-    authorize round
+    round = Round.new(team: @team, user: current_user)
 
     if round.save
       redirect_to round_path(round), notice: 'Round created successfully.'

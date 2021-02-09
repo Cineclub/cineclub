@@ -36,13 +36,9 @@ describe 'Screenings API', type: :request do
   end
 
   describe 'DELETE /screenings/:id' do
-    let!(:screening) { create(:screening, round: round, user: user) }
+    let(:screening) { create(:screening, round: round, user: user) }
 
-    context 'when the user belongs to the team' do
-      before do
-        user.teams << team
-      end
-
+    context 'when the user is the creator of the screening' do
       it 'deletes an existing screening' do
         delete screening_path(id: screening.id, as: user)
 
@@ -53,9 +49,10 @@ describe 'Screenings API', type: :request do
       end
     end
 
-    context 'when the user does not belong to the team' do
+    context 'when the user is not the creator of the screening' do
+      let(:other_user) { create(:user, :confirmed) }
       it 'redirects the user with an error message' do
-        delete screening_path(id: screening.id, as: user)
+        delete screening_path(id: screening.id, as: other_user)
 
         expect(Screening.count).to eq 1
         expect(response).to redirect_to root_path
