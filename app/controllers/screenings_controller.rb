@@ -18,7 +18,7 @@ class ScreeningsController < ApplicationController
   def destroy
     authorize @screening
 
-    @screening.destroy # TODO we're not doing anything with the result, so don't if was successful
+    @screening.destroy # TODO: we're not doing anything with the result, so don't if was successful
 
     redirect_to round_path(@screening.round), notice: 'Screening was removed successfully.'
   end
