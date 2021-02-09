@@ -2,23 +2,29 @@
   <div class="col">
     <h1>Round <%= @round.id %></h1>
 
+    <p><%= @round.user.full_name %>'s turn to pick the movie.</p>
+
+    <h2 class="h4">The movie</h2>
     <% if @round.movie.present? %>
-      <p class="lead"><%= @round.movie.original_title %> by <%= @round.movie.directors.map(&:name).join(', ') %></p>
+      <p class="lead"><%= @round.movie.original_title %> (<%= @round.movie.year %>), by <%= @round.movie.directors.map(&:name).join(', ') %></p>
     <% else %>
       <p>No movie has been set yet.</p>
+      <% if policy(@round).edit? %>
+        <%= link_to 'Set movie', edit_round_path(@round), class: "btn btn-primary" %>
+      <% end %>
     <% end %>
   </div>
 </div>
 
 <% if @round.movie.present? %>
   <div class="row">
-    <div class="col-6">
-      <h2>Screenings</h2>
+    <div class="col">
+      <h2 class="h4">Screenings</h2>
       <table class="table table-hover">
         <thead>
           <tr>
             <th>User</th>
-            <th>Created at</th>
+            <th>At</th>
           </tr>
         </thead>
         <tbody>
