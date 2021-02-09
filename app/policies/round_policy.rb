@@ -1,5 +1,5 @@
 class RoundPolicy < ApplicationPolicy
-  def create?
+  def create_screening?
     user.member_of?(record.team)
   end
 end
