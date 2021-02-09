@@ -1,0 +1,8 @@
+Welcome to Cineclub, <%= @user.full_name %>!
+===============================================
+
+Your account has been successfully created and you're just one step away from starting to play.
+
+Follow this link to confirm your account: <%= confirm_email_url(token: @user.email_confirmation_token) %>
+
+Thanks for joining!
