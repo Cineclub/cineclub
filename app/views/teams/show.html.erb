@@ -27,7 +27,6 @@
 <% end %>
 
 <div class="mt-4">
-
   <h2>Game rounds</h2>
   <% if @team.rounds.present? %>
     <div class="row">
@@ -35,8 +34,13 @@
         <div class="col-md-3 mb-4">
           <div class="card h-100">
             <div class="card-body">
-              <h5 class="card-title"><%= round.movie&.original_title %></h5>
-              <h6 class="card-subtitle mb-2 text-muted"><%= round.movie&.directors.map(&:name).join(', ') %></h6>
+              <% if round.movie.present? %>
+                <h5 class="card-title"><%= round.movie.original_title %></h5>
+                <h6 class="card-subtitle mb-2 text-muted"><%= round.movie.directors.map(&:name).join(', ') %></h6>
+              <% else %>
+                <h5 class="card-title">No movie set</h5>
+                <h6 class="card-subtitle mb-2 text-muted">—</h6>
+              <% end %>
               <p class="card-text"><%= round.user.full_name %></p>
             </div>
             <div class="card-footer">
@@ -50,7 +54,7 @@
     <p>No rounds have been created yet.</p>
   <% end %>
 
-  <% if signed_in? && current_user.member_of?(@team) %>
-  <p><%= link_to 'Create New Round', team_rounds_path(@team), method: :post, class: "btn btn-primary" %></p>
+  <% if policy(@team).create_round? %>
+    <p><%= link_to 'Create New Round', team_rounds_path(@team), method: :post, class: "btn btn-primary" %></p>
   <% end %>
 </div>
