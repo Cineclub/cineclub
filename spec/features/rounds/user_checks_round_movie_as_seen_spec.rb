@@ -15,7 +15,7 @@ feature 'User checks round movie as seen' do
   scenario 'they see a success message' do
     click_link 'Teams'
     click_link 'Some team'
-    click_link 'View'
+    click_link 'Round details'
     click_link 'Set movie as seen'
 
     expect(page).to have_content 'Screening was added successfully.'
