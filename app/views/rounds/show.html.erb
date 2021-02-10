@@ -4,9 +4,23 @@
 
     <p><%= @round.user.full_name %>'s turn to pick the movie.</p>
 
-    <h2 class="h4">The movie</h2>
+    <h2 class="h4 mt-5">Movie</h2>
     <% if @round.movie.present? %>
-      <p class="lead"><%= @round.movie.original_title %> (<%= @round.movie.year %>), by <%= @round.movie.directors.map(&:name).join(', ') %></p>
+      <p>
+        <%= @round.movie.original_title %> (<%= @round.movie.year %>), by <%= @round.movie.directors.map(&:name).join(', ') %>
+      </p>
+
+      <div class="logos">
+        <% if @round.movie.imdb_url.present? %>
+          <a href="<%= @round.movie.imdb_url %>">
+            <img src="<%= asset_path('imdb-logo.svg') %>"/>
+          </a>
+        <% end %>
+        <a href="<%= @round.movie.tmdb_url %>">
+          <img src="<%= asset_path('tmdb-logo.svg') %>"/>
+        </a>
+      </div>
+
     <% else %>
       <p>No movie has been set yet.</p>
       <% if policy(@round).edit? %>
@@ -17,25 +31,16 @@
 </div>
 
 <% if @round.movie.present? %>
-  <div class="row">
+  <div class="row mt-5">
     <div class="col">
       <h2 class="h4">Screenings</h2>
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th>User</th>
-            <th>At</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @screenings.each do |screening| %>
-            <tr>
-              <td><%= screening.user.full_name %></td>
-              <td><%= screening.created_at %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <% if @screenings.present? %>
+        <% @screenings.each do |screening| %>
+          <p><%= screening.user.full_name %> <small class="text-muted">(at <%= screening.created_at %>)</small></p>
+        <% end %>
+      <% else %>
+        <p>No screenings were registered yet.</p>
+      <% end %>
     </div>
   </div>
 
