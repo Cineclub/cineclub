@@ -28,10 +28,9 @@ class RoundsController < ApplicationController
   def update
     authorize @round
 
-    tmdb_id = params[:round][:tmdb_id]
-    movie = Movie.find_by(tmdb_id: tmdb_id) || imported_movie(tmdb_id)
+    result = AddMovieToRound.new(round: @round, tmdb_id: params[:round][:tmdb_id]).call
 
-    if movie.present? && @round.update(movie: movie)
+    if result.successful?
       redirect_to round_path(@round), notice: 'Round updated successfully.'
     else
       flash[:alert] = "Couldn't update round."
@@ -47,10 +46,5 @@ class RoundsController < ApplicationController
 
   def set_team
     @team = Team.find(params[:team_id])
-  end
-
-  def imported_movie(tmdb_id)
-    result = ImportTmdbMovie.new.call(tmdb_movie_id: tmdb_id)
-    result.movie if result.successful?
   end
 end

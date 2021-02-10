@@ -65,11 +65,5 @@ describe 'Rounds API', type: :request do
         expect(flash[:notice]).to eq 'Round updated successfully.'
       end
     end
-
-    context 'when the tmdb_id does not match any existing movie' do
-      it "imports the movie and updates the round's movie" do
-        # TODO: pending
-      end
-    end
   end
 end
