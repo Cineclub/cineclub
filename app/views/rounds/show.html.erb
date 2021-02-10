@@ -11,12 +11,12 @@
       </p>
 
       <div class="logos">
-        <% if @round.movie.imdb_url.present? %>
-          <a href="<%= @round.movie.imdb_url %>">
+        <% if imdb_url(@round.movie).present? %>
+          <a href="<%= imdb_url(@round.movie) %>">
             <img src="<%= asset_path('imdb-logo.svg') %>"/>
           </a>
         <% end %>
-        <a href="<%= @round.movie.tmdb_url %>">
+        <a href="<%= tmdb_url(@round.movie) %>">
           <img src="<%= asset_path('tmdb-logo.svg') %>"/>
         </a>
       </div>
