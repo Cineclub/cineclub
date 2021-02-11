@@ -1,0 +1,14 @@
+<h1>Confirm your e-mail</h1>
+
+<%= form_with url: confirm_email_path, method: :put, local: true do |form| %>
+  <div class="form-group">
+    <%= form.label :token, 'Confirmation token' %>
+    <%=
+      form.text_field :token, minlength: 1, maxlength: 50, class: 'form-control', readonly: true, value: params[:token]
+    %>
+  </div>
+
+  <div class="submit-field">
+    <%= form.submit "Submit", class: "btn btn-primary" %>
+  </div>
+<% end %>
