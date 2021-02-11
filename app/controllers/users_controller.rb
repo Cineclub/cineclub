@@ -4,7 +4,10 @@ class UsersController < Clearance::UsersController
     @user.email_confirmation_token = Clearance::Token.new
 
     if @user.save
-      redirect_back_or url_after_create
+      # TODO: should be done in a background job when possible
+      UserMailer.confirmation_email(@user).deliver_now
+
+      redirect_to root_path, notice: 'Your account has been created. Please check your e-mail.'
     else
       render template: 'users/new'
     end
