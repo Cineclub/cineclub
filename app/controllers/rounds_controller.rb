@@ -1,3 +1,5 @@
+require 'external_urls'
+
 class RoundsController < ApplicationController
   before_action :require_login
   before_action :set_round, only: %i[show edit update]
