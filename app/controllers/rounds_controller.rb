@@ -28,7 +28,7 @@ class RoundsController < ApplicationController
   def update
     authorize @round
 
-    result = AddMovieToRound.new(round: @round, tmdb_id: params[:round][:tmdb_id]).call
+    result = AddMovieToRound.new.call(round: @round, tmdb_id: params[:round][:tmdb_id])
 
     if result.successful?
       redirect_to round_path(@round), notice: 'Round updated successfully.'
