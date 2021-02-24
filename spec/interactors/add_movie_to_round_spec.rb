@@ -2,37 +2,45 @@ require 'rails_helper'
 require 'hanami/interactor'
 
 RSpec.describe AddMovieToRound do
+  let(:import_tmdb_movie_interactor) { instance_double(ImportTmdbMovie, 'import_tmdb_movie_interactor') }
+  subject { AddMovieToRound.new(import_tmdb_movie_interactor: import_tmdb_movie_interactor) }
+
   describe '#call' do
-    let(:tmdb_id) { 123_546_789 }
-    let(:round) { create(:round, movie: nil) }
+    let(:tmdb_movie_id) { 123_456_789 }
+    let(:round) { build(:round) }
 
-    context 'when the movie already exists in the database' do
-      let!(:movie) { create(:movie, tmdb_id: tmdb_id) }
+    context 'when a movie with `tmdb_movie_id` already exists in the database' do
+      before { create(:movie, tmdb_id: tmdb_movie_id) }
 
-      it "updates the round's movie" do
-        expect do
-          described_class.new.call(round: round, tmdb_id: tmdb_id)
-        end.to change(round, :movie).from(nil).to(movie)
+      it "sets the round's movie to the one with `tmdb_movie_id`" do
+        result = subject.call(round: round, tmdb_movie_id: tmdb_movie_id)
+
+        expect(result).to be_successful
+        expect(result.round.id).to eq(round.id)
+        expect(round.movie.reload.tmdb_id).to eq(tmdb_movie_id)
       end
     end
 
-    context 'when the movie does not exist in the database' do
-      let(:movie) { create(:movie, tmdb_id: 123) }
-      let(:import_service) { double(ImportTmdbMovie) }
-
+    context "when a movie with `tmdb_movie_id` doesn't exist in the database" do
       before do
-        result_double = double(Hanami::Interactor::Result)
-        allow(result_double).to receive(:failure?).and_return(false)
-        allow(result_double).to receive(:movie).and_return(movie)
-        allow(import_service).to receive(:call).and_return(result_double)
+        allow(import_tmdb_movie_interactor).to receive(:call) do
+          created_movie = create(:movie, tmdb_id: tmdb_movie_id)
+
+          import_result_double = double('import_result')
+          allow(import_result_double).to receive(:successful?).and_return(true)
+          allow(import_result_double).to receive(:movie).and_return(created_movie)
+
+          import_result_double
+        end
       end
 
       it "imports the movie and updates the round's movie" do
-        expect(import_service).to receive(:call).with(tmdb_movie_id: tmdb_id)
+        expect(import_tmdb_movie_interactor).to receive(:call).with(tmdb_movie_id: tmdb_movie_id)
 
-        described_class.new(import_service: import_service).call(round: round, tmdb_id: tmdb_id)
+        result = subject.call(round: round, tmdb_movie_id: tmdb_movie_id)
 
-        expect(round.reload.movie).to eq movie
+        expect(result.round.id).to eq(round.id)
+        expect(round.movie.reload.tmdb_id).to eq(tmdb_movie_id)
       end
     end
   end
