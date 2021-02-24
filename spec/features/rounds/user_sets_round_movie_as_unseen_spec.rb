@@ -3,7 +3,8 @@ require 'rails_helper'
 feature 'User sets round movie as unseen' do
   given(:team) { create(:team, name: 'Some team') }
   given(:user) { create(:user, :confirmed, teams: [team]) }
-  given(:round) { create(:round, user: user, team: team) }
+  given(:movie) { create(:movie) }
+  given(:round) { create(:round, user: user, movie: movie, team: team) }
 
   background do
     create(:screening, user: user, round: round)

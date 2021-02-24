@@ -3,7 +3,8 @@ require 'rails_helper'
 feature 'User checks round movie as seen' do
   given(:user) { create(:user, :confirmed) }
   given(:team) { create(:team, name: 'Some team') }
-  given(:round) { create(:round, user: user) }
+  given(:movie) { create(:movie) }
+  given(:round) { create(:round, movie: movie, user: user) }
 
   background do
     user.teams << team
