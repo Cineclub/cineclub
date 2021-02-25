@@ -46,3 +46,6 @@ Icon
 
 # Ignore the local-only version of .env which may contain sensitive data
 .env.local
+
+# Ignore the default output of the rails-erd gem
+erd.pdf
