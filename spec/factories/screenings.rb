@@ -1,6 +1,3 @@
 FactoryBot.define do
-  factory :screening do
-    user
-    round
-  end
+  factory :screening
 end
