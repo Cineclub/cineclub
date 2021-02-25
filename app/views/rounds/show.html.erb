@@ -2,34 +2,45 @@
   <div class="col">
     <h1>Round <%= @round.id %></h1>
 
+    <p><%= @round.user.full_name %>'s turn to pick the movie.</p>
+
+    <h2 class="h4 mt-5">Movie</h2>
     <% if @round.movie.present? %>
-      <p class="lead"><%= @round.movie.original_title %> by <%= @round.movie.directors.map(&:name).join(', ') %></p>
+      <p>
+        <%= @round.movie.original_title %> (<%= @round.movie.year %>), by <%= @round.movie.directors.map(&:name).join(', ') %>
+      </p>
+
+      <div class="logos">
+        <% if @round.movie.imdb_id.present? %>
+          <a href="<%= ExternalUrls.imdb_movie_url(@round.movie.imdb_id) %>">
+            <img src="<%= asset_path('imdb-logo.svg') %>"/>
+          </a>
+        <% end %>
+        <a href="<%= ExternalUrls.tmdb_movie_url(@round.movie.tmdb_id) %>">
+          <img src="<%= asset_path('tmdb-logo.svg') %>"/>
+        </a>
+      </div>
+
     <% else %>
       <p>No movie has been set yet.</p>
+      <% if policy(@round).edit? %>
+        <%= link_to 'Set movie', edit_round_path(@round), class: "btn btn-primary" %>
+      <% end %>
     <% end %>
   </div>
 </div>
 
 <% if @round.movie.present? %>
-  <div class="row">
-    <div class="col-6">
-      <h2>Screenings</h2>
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th>User</th>
-            <th>Created at</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @screenings.each do |screening| %>
-            <tr>
-              <td><%= screening.user.full_name %></td>
-              <td><%= screening.created_at %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+  <div class="row mt-5">
+    <div class="col">
+      <h2 class="h4">Screenings</h2>
+      <% if @screenings.present? %>
+        <% @screenings.each do |screening| %>
+          <p><%= screening.user.full_name %> <small class="text-muted">(at <%= screening.created_at %>)</small></p>
+        <% end %>
+      <% else %>
+        <p>No screenings were registered yet.</p>
+      <% end %>
     </div>
   </div>
 

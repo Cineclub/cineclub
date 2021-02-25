@@ -1,0 +1,20 @@
+<div class="col-md-3 mb-4">
+  <div class="card h-100">
+    <div class="card-body">
+      <% if round.movie.present? %>
+        <h5 class="card-title"><%= round.movie.original_title %></h5>
+        <h6 class="card-subtitle mb-2 text-muted"><%= round.movie.directors.map(&:name).join(', ') %></h6>
+      <% else %>
+        <h5 class="card-title">No movie set</h5>
+        <h6 class="card-subtitle mb-2 text-muted">—</h6>
+      <% end %>
+      <p class="card-text"><%= round.user.first_name %>'s turn</p>
+    </div>
+    <div class="card-footer">
+      <%= link_to 'Round details', round_path(round), class: "card-link" %>
+      <% if policy(round).edit? %>
+        <%= link_to 'Set movie', edit_round_path(round), class: "card-link" %>
+      <% end %>
+    </div>
+  </div>
+</div>

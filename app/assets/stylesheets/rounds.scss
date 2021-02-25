@@ -1,0 +1,12 @@
+.logos {
+  a {
+    margin-right: 20px;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  img {
+    max-width: 50px;
+  }
+}

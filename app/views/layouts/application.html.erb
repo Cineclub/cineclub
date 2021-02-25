@@ -10,24 +10,28 @@
   </head>
 
   <body>
-    <%= render "layouts/partials/header" %>
-
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <div id="flash" class="my-3">
-            <% flash.each do |key, value| %>
-              <div class="alert alert-primary flash <%= key %>" role="alert">
-                <%= value %>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
+    <div id="page-container">
+      <div id="content-wrap">
+        <%= render "layouts/partials/header" %>
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div id="flash" class="my-3">
+                <% flash.each do |key, value| %>
+                  <div class="alert alert-primary flash <%= key %>" role="alert">
+                    <%= value %>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                <% end %>
               </div>
-            <% end %>
+              <%= yield %>
+            </div>
           </div>
-          <%= yield %>
         </div>
       </div>
+      <%= render "layouts/partials/footer" %>
     </div>
   </body>
 </html>
