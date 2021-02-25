@@ -1,0 +1,10 @@
+attributes:
+  - foreign_key
+  - inheritance
+warn: true
+title: The Cineclub app data model
+# exclude: null
+# only: null
+# only_recursion_depth: null
+# prepend_primary: false
+# cluster: false
