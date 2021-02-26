@@ -1,7 +1,7 @@
 module Rounds
   class MoviesController < ApplicationController
     before_action :require_login
-    before_action :set_round, only: [:edit, :update]
+    before_action :set_round, only: %i[edit update]
 
     def edit
       authorize @round, :edit_movie?
