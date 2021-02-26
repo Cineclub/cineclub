@@ -23,8 +23,8 @@
 
     <% else %>
       <p>No movie has been set yet.</p>
-      <% if policy(@round).edit? %>
-        <%= link_to 'Set movie', edit_round_path(@round), class: "btn btn-primary" %>
+      <% if policy(@round).edit_movie? %>
+        <%= link_to 'Set movie', edit_round_movie_path(@round), class: "btn btn-primary" %>
       <% end %>
     <% end %>
   </div>
