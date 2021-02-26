@@ -3,7 +3,11 @@ class RoundPolicy < ApplicationPolicy
     user.member_of?(record.team)
   end
 
-  def update?
-    record.user == user
+  def update_movie?
+    true # TODO: User in team && no screenings yet
+  end
+
+  def edit_movie?
+    update_movie?
   end
 end

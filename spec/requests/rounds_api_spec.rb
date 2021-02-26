@@ -59,7 +59,7 @@ describe 'Rounds API', type: :request do
 
     context 'when the tmdb_id matches an existing movie' do
       it "updates the round's movie" do
-        put round_path(round.id, params: { round: { tmdb_id: movie.tmdb_id } }, as: user)
+        put round_movie_path(round.id, params: { round: { tmdb_id: movie.tmdb_id } }, as: user)
 
         expect(round.reload.movie).to eq movie
         expect(flash[:notice]).to eq 'Round updated successfully.'
