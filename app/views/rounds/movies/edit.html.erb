@@ -2,10 +2,10 @@
   <div class="col">
     <div>
       <h2>Set movie for round <%= @round.id %></h2>
-      <%= form_with model: @round, local: true do |form| %>
+      <%= form_with model: [@round, @movie], url: round_movie_path, method: 'patch', local: true do |form| %>
         <div class="form-group">
           <%= form.label :tmdb_id, "TMDb ID" %>
-          <%= form.number_field :tmdb_id, minlength: 5, maxlength: 40, class: 'form-control', placeholder: "e.g. 550" %>
+          <%= form.number_field :tmdb_id, minlength: 5, maxlength: 40, class: 'form-control', placeholder: 'e.g. 550' %>
         </div>
 
         <div class="submit-field">

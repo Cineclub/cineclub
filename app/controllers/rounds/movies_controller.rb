@@ -5,12 +5,14 @@ module Rounds
 
     def edit
       authorize @round, :edit_movie?
+
+      @movie = @round.build_movie
     end
 
     def update
       authorize @round, :update_movie?
 
-      result = AddMovieToRound.new.call(round: @round, tmdb_movie_id: params[:round][:tmdb_id])
+      result = AddMovieToRound.new.call(round: @round, tmdb_movie_id: params[:movie][:tmdb_id])
 
       if result.successful?
         redirect_to round_path(@round), notice: 'Round updated successfully.'
