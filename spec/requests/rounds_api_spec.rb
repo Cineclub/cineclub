@@ -56,6 +56,7 @@ describe 'Rounds API', type: :request do
     let(:user) { create(:user, :confirmed) }
     let(:round) { create(:round, user: user, movie: nil) }
     let(:movie) { create(:movie) }
+    before { round.team.users << user }
 
     context 'when the tmdb_id matches an existing movie' do
       it "updates the round's movie" do

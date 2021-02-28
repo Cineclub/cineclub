@@ -4,7 +4,7 @@ class RoundPolicy < ApplicationPolicy
   end
 
   def update_movie?
-    true # TODO: User in team && no screenings yet
+    user.member_of?(record.team) && !record.screenings.exists?
   end
 
   def edit_movie?
