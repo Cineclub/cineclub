@@ -32,5 +32,11 @@ describe RoundPolicy do
         expect(subject).to permit(user, round)
       end
     end
+
+    context "user doesn't belong to team" do
+      it "denies access even if the round hasn't any screenings" do
+        expect(subject).not_to permit(user, round)
+      end
+    end
   end
 end
