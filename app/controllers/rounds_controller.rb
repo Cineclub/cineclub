@@ -23,22 +23,9 @@ class RoundsController < ApplicationController
     @current_screening = @round.screenings.find_by(user: current_user)
   end
 
-  def edit
-    authorize @round
-  end
+  def edit; end
 
-  def update
-    authorize @round
-
-    result = AddMovieToRound.new.call(round: @round, tmdb_movie_id: params[:round][:tmdb_id])
-
-    if result.successful?
-      redirect_to round_path(@round), notice: 'Round updated successfully.'
-    else
-      flash[:alert] = "Couldn't update round."
-      redirect_to edit_round_path(@round)
-    end
-  end
+  def update; end
 
   private
 
