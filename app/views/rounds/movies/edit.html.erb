@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col">
+    <div>
+      <h2>Set movie for round <%= @round.id %></h2>
+      <%= form_with model: [@round, @movie], url: round_movie_path, method: 'patch', local: true do |form| %>
+        <div class="form-group">
+          <%= form.label :tmdb_id, "TMDb ID" %>
+          <%= form.number_field :tmdb_id, minlength: 5, maxlength: 40, class: 'form-control', placeholder: 'e.g. 550' %>
+        </div>
+
+        <div class="submit-field">
+          <%= form.submit "Submit", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+    <div class="mt-4">
+      <div class="alert alert-info" role="alert">
+        <h2 class="h5">How to find the ID of a movie?</h2>
+        <hr>
+        <p>The TMDb ID of a movie is numeric and can be found in the movie's URL in <a href="https://www.themoviedb.org/">TMDb</a>.</p>
+        <p>As an example, here is the URL for the <a href="https://www.themoviedb.org/movie/550-fight-club">Fight Club</a> page in TMDb:</p>
+        <p><code>https://www.themoviedb.org/movie/<strong>550</strong>-fight-club</code></p>
+        <p>
+          The ID is the number after <code>/movie/</code>. By looking at the example above, we can figure out that the movie's TMDb ID is <strong>550</strong>.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

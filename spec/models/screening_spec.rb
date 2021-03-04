@@ -7,7 +7,7 @@ RSpec.describe Screening, type: :model do
   end
 
   describe 'validations' do
-    subject { build(:screening) }
+    subject { build(:screening, user: build(:user), round: build(:round)) }
     it { should validate_uniqueness_of(:user).scoped_to(:round_id) }
   end
 end

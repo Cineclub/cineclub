@@ -1,6 +1,8 @@
+require 'external_urls'
+
 class RoundsController < ApplicationController
   before_action :require_login
-  before_action :set_round, only: [:show]
+  before_action :set_round, only: %i[show edit update]
   before_action :set_team, only: [:create]
 
   def create
@@ -11,7 +13,8 @@ class RoundsController < ApplicationController
     if round.save
       redirect_to round_path(round), notice: 'Round created successfully.'
     else
-      redirect_to @team, notice: "Couldn't create round."
+      flash[:alert] = "Couldn't create round."
+      redirect_to @team
     end
   end
 
@@ -19,6 +22,10 @@ class RoundsController < ApplicationController
     @screenings = @round.screenings.includes(:user)
     @current_screening = @round.screenings.find_by(user: current_user)
   end
+
+  def edit; end
+
+  def update; end
 
   private
 

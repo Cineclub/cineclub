@@ -14,9 +14,9 @@ Rails.application.routes.draw do
   resources :teams, only: [] do
     resources :rounds, only: [:create]
   end
-
-  resources :rounds, only: [:show] do
+  resources :rounds, only: [:show, :edit, :update] do
     resources :screenings, only: [:create]
+    resource :movie, only: [:edit, :update], module: 'rounds'
   end
 
   resources :screenings, only: [:destroy]
