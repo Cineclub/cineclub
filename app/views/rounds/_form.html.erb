@@ -1,6 +1,6 @@
 <%= form_with model: round.new_record? ? [team, round] : round, local: true do |form| %>
   <div class="form-group">
-    <%= form.label :user_id %>
+    <%= form.label :user_id, "User" %>
     <%= form.select :user_id, options_from_collection_for_select(team.users, "id", "full_name", round.user&.id), {}, class: "form-control" %>
   </div>
 

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'User triggers the creation of a new round' do
-  given(:user) { create(:user, :confirmed) }
+  given(:user) { create(:user, :confirmed, first_name: 'Jane', last_name: 'Doe') }
 
   background do
     user.teams << create(:team, name: 'Some team')
@@ -11,9 +11,12 @@ feature 'User triggers the creation of a new round' do
   scenario 'they see a success message' do
     click_link 'Teams'
     click_link 'Some team'
-    click_link 'Create New Round'
+    click_link 'Create round'
 
-    expect(page).to have_content 'Round created successfully.'
+    select 'Jane Doe', from: 'User'
+    click_button 'Save'
+
+    expect(page).to have_content 'Round was successfully created.'
     expect(page).to have_content 'No movie has been set yet.'
   end
 end
