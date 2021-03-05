@@ -4,7 +4,7 @@
 
     <p><%= @round.user.full_name %>'s turn to pick the movie.</p>
 
-    <%= link_to 'Edit round details', edit_round_path(@round), class: 'btn btn-secondary' %>
+    <%= link_to 'Edit round', edit_round_path(@round), class: 'btn btn-secondary' %>
 
     <h2 class="h4 mt-5">Movie</h2>
     <% if @round.movie.present? %>
