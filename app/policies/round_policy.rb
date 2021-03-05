@@ -10,4 +10,8 @@ class RoundPolicy < ApplicationPolicy
   def edit_movie?
     update_movie?
   end
+
+  def update?
+    user.member_of?(record.team)
+  end
 end

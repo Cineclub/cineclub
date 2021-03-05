@@ -23,9 +23,19 @@ class RoundsController < ApplicationController
     @current_screening = @round.screenings.find_by(user: current_user)
   end
 
-  def edit; end
+  def edit
+    authorize @round
+  end
 
-  def update; end
+  def update
+    authorize @round
+
+    if @round.update(round_params)
+      redirect_to @round, notice: 'Round was successfully updated.'
+    else
+      render :edit
+    end
+  end
 
   private
 
@@ -35,5 +45,9 @@ class RoundsController < ApplicationController
 
   def set_team
     @team = Team.find(params[:team_id])
+  end
+
+  def round_params
+    params.require(:round).permit(:user_id)
   end
 end
