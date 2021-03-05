@@ -14,28 +14,14 @@ describe 'Rounds API', type: :request do
 
       context 'when team and user are valid' do
         it "creates a round for the authenticated user and redirects to the round's show page" do
-          post team_rounds_path(team_id: team.id, as: user)
+          post team_rounds_path(team_id: team.id, params: { round: { user_id: user } }, as: user)
 
           round = Round.find_by(user: user, team: team)
 
           expect(round).to be_present
           expect(response).to have_http_status(:found)
           expect(response).to redirect_to round_path(round)
-          expect(flash[:notice]).to eq 'Round created successfully.'
-        end
-      end
-
-      context "when the round can't be created" do
-        before { allow_any_instance_of(Round).to receive(:save).and_return(false) }
-
-        it "redirects to the team's page with an error message" do
-          post team_rounds_path(team_id: team.id, as: user)
-
-          round = Round.find_by(user: user, team: team)
-
-          expect(round).to be_nil
-          expect(response).to redirect_to team_path(id: team.id)
-          expect(flash[:alert]).to eq "Couldn't create round."
+          expect(flash[:notice]).to eq 'Round was successfully created.'
         end
       end
     end

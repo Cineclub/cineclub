@@ -14,11 +14,11 @@ class RoundsController < ApplicationController
   def create
     authorize @team, :create_round?
 
-    round = Round.new(round_params)
-    round.team = @team
+    @round = Round.new(round_params)
+    @round.team = @team
 
-    if round.save
-      redirect_to round, notice: 'Round was successfully created.'
+    if @round.save
+      redirect_to @round, notice: 'Round was successfully created.'
     else
       render :new
     end
