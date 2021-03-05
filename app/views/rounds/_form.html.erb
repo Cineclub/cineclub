@@ -1,0 +1,10 @@
+<%= form_with model: round, local: true do |form| %>
+  <div class="form-group">
+    <%= form.label :user_id %>
+    <%= form.select :user_id, options_from_collection_for_select(round.users, "id", "full_name", round.user.id), {}, class: "form-control" %>
+  </div>
+
+  <div class="submit-field">
+    <%= form.submit "Save", class: "btn btn-primary" %>
+  </div>
+<% end %>
