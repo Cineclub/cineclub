@@ -19,10 +19,8 @@ describe RoundPolicy do
   end
 
   permissions :update_movie? do
-    context 'user has the turn in the round' do
+    context 'user has turn in round' do
       let(:round) { create(:round, user: user) }
-
-      before { Membership.create(user: user, team: round.team) }
 
       it 'denies access if the round has screenings' do
         round.screenings.create(user: user)
@@ -35,8 +33,24 @@ describe RoundPolicy do
       end
     end
 
-    context 'user does not have the turn in the round' do
+    context 'user does not have turn in round' do
       it "denies access even if the round hasn't any screenings" do
+        expect(subject).not_to permit(user, round)
+      end
+    end
+  end
+
+  permissions :update? do
+    context 'user belongs to team' do
+      before { Membership.create(user: user, team: round.team) }
+
+      it 'grants access' do
+        expect(subject).to permit(user, round)
+      end
+    end
+
+    context 'user does not belong to team' do
+      it 'denies access' do
         expect(subject).not_to permit(user, round)
       end
     end
