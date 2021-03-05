@@ -39,6 +39,6 @@
   <% end %>
 
   <% if policy(@team).create_round? %>
-    <p><%= link_to 'Create New Round', team_rounds_path(@team), method: :post, class: "btn btn-primary" %></p>
+    <p><%= link_to 'Create New Round', new_team_round_path(@team), class: "btn btn-primary" %></p>
   <% end %>
 </div>

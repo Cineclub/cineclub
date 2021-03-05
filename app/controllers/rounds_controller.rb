@@ -3,18 +3,24 @@ require 'external_urls'
 class RoundsController < ApplicationController
   before_action :require_login
   before_action :set_round, only: %i[show edit update]
-  before_action :set_team, only: [:create]
+  before_action :set_team, only: %i[new create]
+
+  def new
+    authorize @team, :create_round?
+
+    @round = Round.new
+  end
 
   def create
     authorize @team, :create_round?
 
-    round = Round.new(team: @team, user: current_user)
+    round = Round.new(round_params)
+    round.team = @team
 
     if round.save
-      redirect_to round_path(round), notice: 'Round created successfully.'
+      redirect_to round, notice: 'Round was successfully created.'
     else
-      flash[:alert] = "Couldn't create round."
-      redirect_to @team
+      render :new
     end
   end
 
