@@ -30,7 +30,7 @@
   <h2>Game rounds</h2>
   <% if @team.rounds.present? %>
     <div class="row mt-3">
-      <% @team.rounds.each do |round| %>
+      <% @team.rounds.order(:created_at).each do |round| %>
         <%= render 'layouts/partials/round_card', round: round %>
       <% end %>
     </div>
