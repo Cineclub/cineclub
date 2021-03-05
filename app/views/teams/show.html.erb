@@ -19,9 +19,9 @@
 <% if signed_in? %>
   <p class="mt-3">
     <% if current_user.member_of?(@team) %>
-      <%= link_to 'Leave', leave_team_path(@team), method: :patch, class: "btn btn-secondary" %>
+      <%= link_to 'Leave', leave_team_path(@team), method: :patch, class: 'btn btn-secondary' %>
     <% else %>
-      <%= link_to 'Join', join_team_path(@team), method: :patch, class: "btn btn-primary" %>
+      <%= link_to 'Join', join_team_path(@team), method: :patch, class: 'btn btn-primary' %>
     <% end %>
   </p>
 <% end %>
@@ -39,6 +39,6 @@
   <% end %>
 
   <% if policy(@team).create_round? %>
-    <p><%= link_to 'Create round', new_team_round_path(@team), class: "btn btn-primary" %></p>
+    <p><%= link_to 'Create round', new_team_round_path(@team), class: 'btn btn-primary' %></p>
   <% end %>
 </div>
