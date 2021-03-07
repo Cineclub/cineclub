@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   put "/confirm_email" => "email_confirmations#update"
 
   resources :teams, only: [] do
-    resources :rounds, only: [:create]
+    resources :rounds, only: [:new, :create]
   end
   resources :rounds, only: [:show, :edit, :update] do
     resources :screenings, only: [:create]
