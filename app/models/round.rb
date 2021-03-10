@@ -6,13 +6,10 @@ class Round < ApplicationRecord
 
   before_create :set_index_in_team
 
-  def set_index_in_team
-    self.index_in_team = next_index_in_team
-  end
-
   private
 
-  def next_index_in_team
-    (Round.where(team: team).order(:index_in_team).last&.index_in_team.to_i + 1) || 1
+  def set_index_in_team
+    last_round = Round.where(team: team).order(:index_in_team).last
+    self.index_in_team = last_round ? last_round.index_in_team + 1 : 1
   end
 end
