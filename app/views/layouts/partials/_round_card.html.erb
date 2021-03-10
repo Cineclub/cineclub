@@ -12,9 +12,6 @@
     </div>
     <div class="card-footer">
       <%= link_to 'Round details', round_path(round), class: "card-link" %>
-      <% if policy(round).edit_movie? %>
-        <%= link_to 'Set movie', edit_round_movie_path(round), class: "card-link" %>
-      <% end %>
     </div>
   </div>
 </div>

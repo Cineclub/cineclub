@@ -6,6 +6,7 @@ RSpec.describe Round, type: :model do
     it { should belong_to(:team) }
     it { should belong_to(:movie).optional }
     it { should have_many(:screenings) }
+    it { should have_many(:users) }
   end
 
   describe '#index' do
