@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_09_175446) do
+ActiveRecord::Schema.define(version: 2021_02_08_205840) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,9 +72,9 @@ ActiveRecord::Schema.define(version: 2021_03_09_175446) do
     t.bigint "user_id", null: false
     t.bigint "team_id", null: false
     t.bigint "movie_id"
+    t.integer "index_in_team", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "index_in_team", null: false
     t.index ["movie_id"], name: "index_rounds_on_movie_id"
     t.index ["team_id", "index_in_team"], name: "index_rounds_on_team_id_and_index_in_team", unique: true
     t.index ["team_id"], name: "index_rounds_on_team_id"
