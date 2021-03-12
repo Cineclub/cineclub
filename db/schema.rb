@@ -72,9 +72,11 @@ ActiveRecord::Schema.define(version: 2021_02_08_205840) do
     t.bigint "user_id", null: false
     t.bigint "team_id", null: false
     t.bigint "movie_id"
+    t.integer "index_in_team", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["movie_id"], name: "index_rounds_on_movie_id"
+    t.index ["team_id", "index_in_team"], name: "index_rounds_on_team_id_and_index_in_team", unique: true
     t.index ["team_id"], name: "index_rounds_on_team_id"
     t.index ["user_id"], name: "index_rounds_on_user_id"
   end
