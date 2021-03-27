@@ -49,11 +49,13 @@ ActiveRecord::Schema.define(version: 2021_03_17_171114) do
     t.bigint "invitee_id", null: false
     t.bigint "inviter_id", null: false
     t.bigint "team_id", null: false
-    t.boolean "accepted", default: false, null: false
+    t.datetime "dismissed_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["dismissed_at"], name: "index_invitations_on_dismissed_at"
+    t.index ["invitee_id", "dismissed_at"], name: "index_invitations_on_invitee_id_and_dismissed_at"
+    t.index ["invitee_id", "team_id", "dismissed_at"], name: "index_invitations_on_invitee_id_and_team_id_and_dismissed_at"
     t.index ["invitee_id"], name: "index_invitations_on_invitee_id"
-    t.index ["inviter_id", "invitee_id", "team_id"], name: "index_invitations_on_inviter_id_and_invitee_id_and_team_id"
     t.index ["inviter_id"], name: "index_invitations_on_inviter_id"
     t.index ["team_id"], name: "index_invitations_on_team_id"
   end

@@ -3,8 +3,14 @@ class Invitation < ApplicationRecord
   belongs_to :inviter, class_name: 'User'
   belongs_to :team
 
-  validates :invitee, uniqueness: { scope: %i[team accepted] }, unless: :accepted?
+  validates :invitee, uniqueness: { scope: :team, conditions: -> { pending } }, if: :pending?
   validate :invitee_not_in_team, on: :create
+
+  scope :pending, -> { where(dismissed_at: nil) }
+
+  def pending?
+    dismissed_at.nil?
+  end
 
   private
 
