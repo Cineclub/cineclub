@@ -5,7 +5,5 @@ class Team < ApplicationRecord
   has_many :users, through: :memberships
   validates :name, presence: true, length: { minimum: 5, maximum: 40 }
 
-  def empty?
-    users.empty?
-  end
+  delegate :empty?, to: :users
 end
