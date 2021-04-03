@@ -21,7 +21,9 @@
     <% if current_user.member_of?(@team) %>
       <%= link_to 'Leave', leave_team_path(@team), method: :patch, class: 'btn btn-secondary' %>
     <% else %>
-      <%= link_to 'Join', join_team_path(@team), method: :patch, class: 'btn btn-primary' %>
+      <% if policy(@team).join? %>
+        <%= link_to 'Join', join_team_path(@team), method: :patch, class: 'btn btn-primary' %>
+      <% end %>
     <% end %>
   </p>
 <% end %>

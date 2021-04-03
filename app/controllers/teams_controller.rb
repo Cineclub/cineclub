@@ -33,6 +33,8 @@ class TeamsController < ApplicationController
   end
 
   def join
+    authorize @team
+
     if @team.users << current_user
       redirect_to @team, notice: 'Team was successfully joined.'
     else
