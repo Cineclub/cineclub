@@ -7,10 +7,6 @@ class TeamPolicy < ApplicationPolicy
     member?
   end
 
-  def join?
-    record.empty?
-  end
-
   private
 
   def member?
