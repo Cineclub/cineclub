@@ -32,9 +32,9 @@ RSpec.describe Invitation, type: :model do
         end
       end
 
-      context 'inviting a user different than `invitee`' do
-        let(:another_invitee) { create(:user) }
-        subject { build(:invitation, inviter: inviter, invitee: another_invitee, team: team) }
+      context 'an invitation for the same `invitee` user exists for `another_team`' do
+        let(:another_team) { create(:team) }
+        before { create(:invitation, invitee: invitee, inviter: inviter, team: another_team) }
 
         it 'allows inviting the same user to another team' do
           expect(subject).to be_valid
