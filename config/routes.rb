@@ -21,5 +21,6 @@ Rails.application.routes.draw do
 
   resources :screenings, only: [:destroy]
 
+  get "/dashboard", to: 'home#dashboard'
   root to: 'home#show'
 end
