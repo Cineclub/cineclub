@@ -1,57 +1,46 @@
 <div class="row">
   <div class="col">
     <h2 class="h2">My teams</h2>
-    <ul class="list-group">
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        <span>
-          <a href="#">Los Locos</a>
-          <small class="text-muted">5th round</small>
-        </span>
-        <span>Avatar</span>
-      </li>
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        <span>
-          <a href="#">Team ABCDEF</a>
-          <small class="text-muted">3rd round</small>
-        </span>
-        <span>Eternal Sunshine of the Spotless Mind</span>
-      </li>
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        <span>
-          <a href="#">Mal Nenhum</a>
-          <small class="text-muted">10th round</small>
-        </span>
-        <span>Fight Club</span>
-      </li>
-    </ul>
+    <% if current_user.teams.present? %>
+      <ul class="list-group">
+        <% current_user.teams.each do |team| %>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span>
+              <a href="<%= team_path(team) %>"><%= team.name %></a>
+
+              <% if team.current_round.present? %>
+                <small class="text-muted"><%= "#{team.current_round.index_in_team}#{team.current_round.index_in_team.ordinal} round" %></small>
+              <% end %>
+            </span>
+            <span><%= team.current_round.movie&.original_title %></span>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>You haven't joined any teams.</p>
+      <p><%= link_to 'Create team', new_team_path, class: 'btn btn-primary' %></p>
+    <% end %>
   </div>
 </div>
 
-<div class="row mt-4">
-  <div class="col">
-    <h2 class="h5">Pending invitations</h2>
-    <ul class="list-group">
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        <span>Team 1<br/><small class="text-muted">3 days ago</small></span>
-        <div class="">
-          <span><button class="btn btn-success btn-sm">Accept</button></span>
-          <span><button class="btn btn-danger btn-sm">Decline</button></span>
-        </div>
-      </li>
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        <span>Team 2<br/><small class="text-muted">3 days ago</small></span>
-        <div class="">
-          <span><button class="btn btn-success btn-sm">Accept</button></span>
-          <span><button class="btn btn-danger btn-sm">Decline</button></span>
-        </div>
-      </li>
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        <span>Team 3<br/><small class="text-muted">3 days ago</small></span>
-        <div class="">
-          <span><button class="btn btn-success btn-sm">Accept</button></span>
-          <span><button class="btn btn-danger btn-sm">Decline</button></span>
-        </div>
-      </li>
-    </ul>
+<% if current_user.pending_invitations_as_invitee.present? %>
+  <div class="row mt-4">
+    <div class="col">
+      <h2 class="h5">Pending invitations</h2>
+      <ul class="list-group">
+        <% current_user.pending_invitations_as_invitee.each do |invitation| %>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span>
+              <%= invitation.team.name %><br/>
+              <small class="text-muted"><%= time_ago_in_words(invitation.created_at) %></small>
+            </span>
+            <div>
+              <span><button class="btn btn-success btn-sm">Accept</button></span>
+              <span><button class="btn btn-danger btn-sm">Decline</button></span>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
   </div>
-</div>
+<% end %>

@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :rounds, dependent: :destroy # this should be nullified
   has_many :teams, through: :memberships
   has_many :screenings, dependent: :destroy
+  has_many :pending_invitations_as_invitee, class_name: 'Invitation', foreign_key: 'invitee_id'
 
   validates :first_name, presence: true
 
