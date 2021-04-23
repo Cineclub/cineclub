@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'hanami/interactor'
 
 RSpec.describe AddMovieToRound do
   let(:import_tmdb_movie_interactor) { instance_double(ImportTmdbMovie, 'import_tmdb_movie_interactor') }

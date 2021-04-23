@@ -15,7 +15,10 @@ class TeamsController < ApplicationController
   def create
     @team = Team.new(team_params)
 
-    if @team.save
+    service = CreateTeamAndAddUser.new
+    result = service.call(user: current_user, team_name: team_params[:name])
+
+    if result.success?
       redirect_to @team, notice: 'Team was successfully created.'
     else
       render :new
@@ -33,6 +36,8 @@ class TeamsController < ApplicationController
   end
 
   def join
+    authorize @team
+
     if @team.users << current_user
       redirect_to @team, notice: 'Team was successfully joined.'
     else

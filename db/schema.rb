@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_08_205840) do
+ActiveRecord::Schema.define(version: 2021_03_17_171114) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,21 @@ ActiveRecord::Schema.define(version: 2021_02_08_205840) do
     t.index ["imdb_id"], name: "index_directors_on_imdb_id", unique: true
     t.index ["name"], name: "index_directors_on_name"
     t.index ["tmdb_id"], name: "index_directors_on_tmdb_id", unique: true
+  end
+
+  create_table "invitations", force: :cascade do |t|
+    t.bigint "invitee_id", null: false
+    t.bigint "inviter_id", null: false
+    t.bigint "team_id", null: false
+    t.datetime "dismissed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dismissed_at"], name: "index_invitations_on_dismissed_at"
+    t.index ["invitee_id", "dismissed_at"], name: "index_invitations_on_invitee_id_and_dismissed_at"
+    t.index ["invitee_id", "team_id", "dismissed_at"], name: "index_invitations_on_invitee_id_and_team_id_and_dismissed_at"
+    t.index ["invitee_id"], name: "index_invitations_on_invitee_id"
+    t.index ["inviter_id"], name: "index_invitations_on_inviter_id"
+    t.index ["team_id"], name: "index_invitations_on_team_id"
   end
 
   create_table "memberships", force: :cascade do |t|
@@ -122,6 +137,9 @@ ActiveRecord::Schema.define(version: 2021_02_08_205840) do
 
   add_foreign_key "directions", "directors"
   add_foreign_key "directions", "movies"
+  add_foreign_key "invitations", "teams"
+  add_foreign_key "invitations", "users", column: "invitee_id"
+  add_foreign_key "invitations", "users", column: "inviter_id"
   add_foreign_key "memberships", "teams"
   add_foreign_key "memberships", "users"
   add_foreign_key "rounds", "movies"
