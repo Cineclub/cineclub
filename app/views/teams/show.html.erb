@@ -24,6 +24,12 @@
   </p>
 <% end %>
 
+<%= form_with url: invitations_path, local: true, class: 'form-inline' do |form| %>
+  <%= form.email_field :invitee_email, class: 'form-control mb-2 mr-sm-2', placeholder: 'janedoe@example.org' %>
+  <%= form.hidden_field :team_id, value: @team.id %>
+  <%= form.submit 'Invite', class: "btn btn-primary mb-2" %>
+<% end %>
+
 <div class="mt-4">
   <h2>Game rounds</h2>
   <% if @team.rounds.present? %>
