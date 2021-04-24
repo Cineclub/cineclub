@@ -19,12 +19,12 @@ class InvitationsController < ApplicationController
 
   def accept
     invitation.accept!
-    redirect_to dashboard_path, notice: 'Invitation accepted successfully.'
+    redirect_to root_path, notice: 'Invitation accepted successfully.'
   end
 
   def reject
     invitation.reject!
-    redirect_to dashboard_path, notice: 'Invitation declined successfully.'
+    redirect_to root_path, notice: 'Invitation declined successfully.'
   end
 
   private
