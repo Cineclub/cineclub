@@ -6,6 +6,8 @@ class InvitationsController < ApplicationController
   attr_reader :invitation, :team, :invitee
 
   def create
+    authorize @team, :create_invitation?
+
     invitation = Invitation.new(inviter: current_user, invitee: invitee, team: team)
 
     if invitation.save
