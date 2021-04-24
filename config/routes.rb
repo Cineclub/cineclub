@@ -6,6 +6,11 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :invitations, only: [] do
+    post 'accept'
+    post 'reject'
+  end
+
   resources :users, controller: :users, only: :create
 
   get "/confirm_email" => "email_confirmations#edit", as: "confirm_email"
