@@ -7,6 +7,7 @@ RSpec.describe User, type: :model do
     it { should have_many(:rounds) }
     it { should have_many(:teams) }
     it { should have_many(:screenings) }
+    it { should have_many(:received_pending_invitations).class_name('Invitation').with_foreign_key('invitee_id') }
   end
 
   describe 'validations' do
