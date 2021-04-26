@@ -18,4 +18,14 @@ RSpec.describe Team, type: :model do
         .is_at_most(40)
     end
   end
+
+  describe '#current_round' do
+    let(:team) { create(:team) }
+
+    before { create_list(:round, 2, team: team) }
+
+    it 'returns the round with the highest index for the team' do
+      expect(team.current_round.index_in_team).to eq 2
+    end
+  end
 end
