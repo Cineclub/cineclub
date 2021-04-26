@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col">
+    <h2 class="h2">My teams</h2>
+    <% if current_user.teams.present? %>
+      <ul class="list-group">
+        <% current_user.teams.each do |team| %>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span>
+              <a href="<%= team_path(team) %>"><%= team.name %></a>
+
+              <% if team.current_round.present? %>
+                <small class="text-muted"><%= "#{team.current_round.index_in_team}#{team.current_round.index_in_team.ordinal} round" %></small>
+              <% end %>
+            </span>
+            <% if team.current_round.present? %>
+              <span><%= team.current_round.movie&.original_title %></span>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>You haven't joined any teams.</p>
+      <p><%= link_to 'Create team', new_team_path, class: 'btn btn-primary' %></p>
+    <% end %>
+  </div>
+</div>
+
+<% if current_user.received_pending_invitations.present? %>
+  <div class="row mt-4">
+    <div class="col">
+      <h2 class="h5">Pending invitations</h2>
+      <ul class="list-group">
+        <% current_user.received_pending_invitations.includes(:team).each do |invitation| %>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span>
+              <%= invitation.team.name %><br/>
+              <small class="text-muted"><%= time_ago_in_words(invitation.created_at) %></small>
+            </span>
+            <div>
+              <span class="d-inline-block">
+                <%= button_to 'Accept', invitation_accept_path(invitation), class: 'btn btn-success btn-sm' %>
+              </span>
+              <span class="d-inline-block">
+                <%= button_to 'Decline', invitation_reject_path(invitation), class: 'btn btn-danger btn-sm' %>
+              </span>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>

@@ -6,4 +6,8 @@ class Team < ApplicationRecord
   validates :name, uniqueness: { case_sensitive: false }, presence: true, length: { minimum: 5, maximum: 40 }
 
   delegate :empty?, to: :users
+
+  def current_round
+    rounds.order(:index_in_team).last
+  end
 end
