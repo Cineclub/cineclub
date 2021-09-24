@@ -1,5 +1,5 @@
 class InvitationsController < ApplicationController
-  before_action :set_invitation, only: %i[accept reject]
+  before_action :set_invitation, only: %i[update]
   before_action :set_team, only: [:create]
   before_action :set_invitee, only: [:create]
 
@@ -17,6 +17,15 @@ class InvitationsController < ApplicationController
     end
   end
 
+  def update
+    should_accept_invitation = params[:invitation][:action] == 'accept'
+    return accept if should_accept_invitation
+
+    reject
+  end
+
+  private
+
   def accept
     invitation.accept!
     redirect_to root_path, notice: 'Invitation accepted successfully.'
@@ -27,10 +36,8 @@ class InvitationsController < ApplicationController
     redirect_to root_path, notice: 'Invitation declined successfully.'
   end
 
-  private
-
   def set_invitation
-    @invitation = Invitation.find(params[:invitation_id])
+    @invitation = Invitation.find(params[:id])
   end
 
   def set_team

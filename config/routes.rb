@@ -6,10 +6,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :invitations, only: [:create] do
-    post 'accept'
-    post 'reject'
-  end
+  resources :invitations, only: [:create, :update]
 
   resources :users, controller: :users, only: :create
 
