@@ -22,14 +22,15 @@ if Rails.env.development? || Rails.env.staging?
       end
 
       if Rails.env.development?
-        Team.create(name: 'The Rest', users: [
-          User.create(
+        Team.create!(name: 'The Rest', users: [
+          User.create!(
             first_name: 'Henry',
             last_name: 'Fonda',
             email: 'henry@example.org',
-            password: 'filmpassword'
+            password: 'filmpassword',
+            email_confirmed_at: Time.current
           ),
-          User.create(
+          User.create!(
             first_name: 'Lauren',
             last_name: 'Bacall',
             email: 'lauren@example.org',
@@ -37,17 +38,17 @@ if Rails.env.development? || Rails.env.staging?
           )
         ])
 
-        Team.create(
+        Team.create!(
           name: 'The Irishmen',
           users: [
-            User.create(
+            User.create!(
               first_name: 'John',
               last_name: 'Wayne',
               email: 'john@example.org',
               password: 'filmpassword',
               email_confirmed_at: Time.current
             ),
-            User.create(
+            User.create!(
               first_name: 'Maureen',
               last_name: "O'Hara",
               email: 'maureen@example.org',
@@ -62,7 +63,8 @@ if Rails.env.development? || Rails.env.staging?
           ]
         )
 
-        Screening.create(user: User.last, round: Round.last)
+        Screening.create!(user: User.last, round: Round.last)
+        Invitation.create!(invitee: User.first, inviter: User.last, team: Team.last)
       end
     end
   end
